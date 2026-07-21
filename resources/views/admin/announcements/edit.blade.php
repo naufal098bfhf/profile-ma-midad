@@ -1,0 +1,342 @@
+@extends('layouts.admin')
+
+@section('title', 'Edit Pengumuman')
+
+@section('content')
+<div class="row">
+	<div class="col-12 col-xl-12 grid-margin stretch-card">
+		<div class="card overflow-hidden">
+			<div class="card-body">
+				<div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
+					<h6 class="card-title mb-0">Edit Pengumuman</h6>
+					<div class="dropdown">
+						<button class="btn p-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+							<a class="dropdown-item d-flex align-items-center" href="{{ route('admin.announcements.index') }}"><i data-feather="list" class="icon-sm me-2"></i> <span class="">Daftar Pengumuman</span></a>
+							<a class="dropdown-item d-flex align-items-center" href="{{ route('admin.announcements.show', $announcement) }}"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">Lihat Detail</span></a>
+						</div>
+					</div>
+				</div>
+				<div class="row align-items-start">
+					<div class="col-md-7">
+						<p class="text-muted tx-13 mb-3 mb-md-0">Edit pengumuman "{{ $announcement->title }}". Perbarui informasi yang diperlukan.</p>
+					</div>
+					<div class="col-md-5 d-flex justify-content-md-end">
+						<a href="{{ route('admin.announcements.index') }}" class="btn btn-secondary mb-3 mb-md-0">
+							<i data-feather="arrow-left" class="icon-sm me-2"></i>
+							Kembali
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<form action="{{ route('admin.announcements.update', $announcement) }}" method="POST" enctype="multipart/form-data">
+					@csrf
+					@method('PUT')
+					
+					<div class="row">
+						<div class="col-md-8">
+							<div class="mb-3">
+								<label for="title" class="form-label">Judul Pengumuman <span class="text-danger">*</span></label>
+								<input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title', $announcement->title) }}" required>
+								@error('title')
+									<div class="invalid-feedback">{{ $message }}</div>
+								@enderror
+							</div>
+
+							<div class="mb-3">
+								<label for="summary" class="form-label">Ringkasan <span class="text-danger">*</span></label>
+								<textarea class="form-control @error('summary') is-invalid @enderror" id="summary" name="summary" rows="3" required>{{ old('summary', $announcement->summary) }}</textarea>
+								@error('summary')
+									<div class="invalid-feedback">{{ $message }}</div>
+								@enderror
+							</div>
+
+							<div class="mb-3">
+								<label for="content" class="form-label">Konten <span class="text-danger">*</span></label>
+								<textarea class="form-control @error('content') is-invalid @enderror" id="content" name="content" rows="10" required>{{ old('content', $announcement->content) }}</textarea>
+								@error('content')
+									<div class="invalid-feedback">{{ $message }}</div>
+								@enderror
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="mb-3">
+								<label for="category_id" class="form-label">Kategori <span class="text-danger">*</span></label>
+								<select class="form-select @error('category_id') is-invalid @enderror" id="category_id" name="category_id" required>
+									<option value="">Pilih Kategori</option>
+									@foreach($categories as $id => $name)
+										<option value="{{ $id }}" {{ old('category_id', $announcement->category_id) == $id ? 'selected' : '' }}>{{ $name }}</option>
+									@endforeach
+								</select>
+								<small class="form-text text-muted">
+									<button type="button" class="btn btn-link p-0 text-primary" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus icon-sm me-1"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Tambah Kategori Baru
+									</button>
+								</small>
+								@error('category_id')
+									<div class="invalid-feedback">{{ $message }}</div>
+								@enderror
+							</div>
+
+							<div class="mb-3">
+								<label for="priority" class="form-label">Prioritas <span class="text-danger">*</span></label>
+								<select class="form-select @error('priority') is-invalid @enderror" id="priority" name="priority" required>
+									<option value="">Pilih Prioritas</option>
+									@foreach($priorities as $key => $label)
+										<option value="{{ $key }}" {{ old('priority', $announcement->priority) == $key ? 'selected' : '' }}>{{ $label }}</option>
+									@endforeach
+								</select>
+								@error('priority')
+									<div class="invalid-feedback">{{ $message }}</div>
+								@enderror
+							</div>
+
+							<div class="mb-3">
+								<label class="form-label">Lampiran</label>
+								<div class="btn-group btn-group-sm mb-2" role="group">
+									@php
+										$defaultType = old('attachment_type', filter_var($announcement->attachment, FILTER_VALIDATE_URL) ? 'link' : 'file');
+									@endphp
+									<input type="radio" class="btn-check" name="attachment_type" id="attachment_type_file" value="file" {{ $defaultType === 'file' ? 'checked' : '' }}>
+									<label class="btn {{ $defaultType === 'file' ? 'btn-primary active' : 'btn-outline-primary' }}" for="attachment_type_file">File</label>
+
+									<input type="radio" class="btn-check" name="attachment_type" id="attachment_type_link" value="link" {{ $defaultType === 'link' ? 'checked' : '' }}>
+									<label class="btn {{ $defaultType === 'link' ? 'btn-primary active' : 'btn-outline-primary' }}" for="attachment_type_link">Link</label>
+								</div>
+
+								<div id="attachment_file_group" class="mt-2" style="display: none;">
+									<label for="attachments" class="form-label">Pilih File (bisa beberapa)</label>
+									@if($announcement->attachment)
+										<div class="mb-2">
+											<small class="text-muted">Lampiran lama (tetap tersimpan):</small>
+											<a href="{{ $announcement->attachment }}" target="_blank" class="d-block">
+												<i data-feather="file" class="icon-sm me-1"></i>
+												{{ $announcement->attachment_name ?? 'Download' }}
+											</a>
+										</div>
+									@endif
+									<input type="file" class="form-control @error('attachments.*') is-invalid @enderror" id="attachments" name="attachments[]" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+									<small class="form-text text-muted">Format: PDF, JPG, PNG, DOC, DOCX (maks 10MB per file).</small>
+									@error('attachments.*')
+										<div class="invalid-feedback">{{ $message }}</div>
+									@enderror
+								</div>
+
+								<div id="attachment_link_group" class="mt-2" style="display: none;">
+									<label for="attachment_link" class="form-label">URL Lampiran</label>
+									<input type="url" class="form-control @error('attachment_link') is-invalid @enderror" id="attachment_link" name="attachment_link" placeholder="https://contoh.com/dokumen.pdf" value="{{ old('attachment_link', filter_var($announcement->attachment, FILTER_VALIDATE_URL) ? $announcement->attachment : '') }}">
+									<small class="form-text text-muted">Masukkan URL file (Google Drive, website resmi, dsb.).</small>
+									@error('attachment_link')
+										<div class="invalid-feedback">{{ $message }}</div>
+									@enderror
+								</div>
+							</div>
+
+							<div class="mb-3">
+								<label class="form-label">Lampiran yang sudah terunggah</label>
+								@if($announcement->attachments && $announcement->attachments->count())
+									<div class="list-group mb-2">
+										@foreach($announcement->attachments as $att)
+											<div class="list-group-item d-flex justify-content-between align-items-center">
+												<div class="text-truncate">
+													<i data-feather="paperclip" class="icon-sm me-1"></i>
+													{{ $att->file_name ?? basename($att->file_url) }}
+												</div>
+												<form action="{{ route('admin.announcements.attachments.destroy', [$announcement, $att]) }}" method="POST" onsubmit="return confirm('Hapus lampiran ini?')">
+													@csrf
+													@method('DELETE')
+													<button type="submit" class="btn btn-sm btn-outline-danger">
+														<i data-feather="trash" class="icon-sm"></i>
+														Hapus
+													</button>
+												</form>
+											</div>
+										@endforeach
+									</div>
+								@else
+									<p class="text-muted">Belum ada lampiran tambahan.</p>
+								@endif
+							</div>
+
+							<div class="mb-3">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="is_published" name="is_published" value="1" {{ old('is_published', $announcement->is_published) ? 'checked' : '' }}>
+									<label class="form-check-label" for="is_published">
+										Publikasikan
+									</label>
+								</div>
+							</div>
+
+							<div class="mb-3">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1" {{ old('is_featured', $announcement->is_featured) ? 'checked' : '' }}>
+									<label class="form-check-label" for="is_featured">
+										Featured
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="d-flex justify-content-end">
+						<a href="{{ route('admin.announcements.index') }}" class="btn btn-secondary me-2">Batal</a>
+						<button type="submit" class="btn btn-primary">
+							<i data-feather="save" class="icon-sm me-2"></i>
+							Update Pengumuman
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Tambah Kategori -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="addCategoryModalLabel">Tambah Kategori Baru</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form id="addCategoryForm">
+				<div class="modal-body">
+					<div class="mb-3">
+						<label for="category_name" class="form-label">Nama Kategori <span class="text-danger">*</span></label>
+						<input type="text" class="form-control" id="category_name" name="name" required>
+					</div>
+					<div class="mb-3">
+						<label for="category_description" class="form-label">Deskripsi</label>
+						<textarea class="form-control" id="category_description" name="description" rows="3"></textarea>
+					</div>
+					<div class="mb-3">
+						<label for="category_color" class="form-label">Warna</label>
+						<input type="color" class="form-control form-control-color" id="category_color" name="color" value="#007bff">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+					<button type="submit" class="btn btn-primary">
+						<i data-feather="save" class="icon-sm me-2"></i>
+						Simpan Kategori
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+@endsection
+
+@push('custom-js')
+<script>
+	$(function() {
+		'use strict';
+
+		// Toggle attachment type (file/link)
+		function updateAttachmentVisibility() {
+			const type = $('input[name="attachment_type"]:checked').val();
+			if (type === 'link') {
+				$('#attachment_link_group').show();
+				$('#attachment_file_group').hide();
+			} else {
+				$('#attachment_link_group').hide();
+				$('#attachment_file_group').show();
+			}
+
+			// update active classes on labels
+			const $fileLabel = $('label[for="attachment_type_file"]');
+			const $linkLabel = $('label[for="attachment_type_link"]');
+			if (type === 'link') {
+				$fileLabel.removeClass('btn-primary active').addClass('btn-outline-primary');
+				$linkLabel.removeClass('btn-outline-primary').addClass('btn-primary active');
+			} else {
+				$linkLabel.removeClass('btn-primary active').addClass('btn-outline-primary');
+				$fileLabel.removeClass('btn-outline-primary').addClass('btn-primary active');
+			}
+		}
+		$('input[name="attachment_type"]').on('change', updateAttachmentVisibility);
+		updateAttachmentVisibility();
+		
+		// Auto-resize textarea
+		$('textarea').on('input', function() {
+			this.style.height = 'auto';
+			this.style.height = (this.scrollHeight) + 'px';
+		});
+
+		// Handle add category form submission
+		$('#addCategoryForm').on('submit', function(e) {
+			e.preventDefault();
+			
+			const formData = new FormData(this);
+			const submitBtn = $(this).find('button[type="submit"]');
+			const originalText = submitBtn.html();
+			
+			// Show loading state
+			submitBtn.html('<span class="spinner-border spinner-border-sm me-2"></span>Menyimpan...');
+			submitBtn.prop('disabled', true);
+			
+			$.ajax({
+				url: '{{ route("admin.announcements.category.store") }}',
+				type: 'POST',
+				data: formData,
+				processData: false,
+				contentType: false,
+				headers: {
+					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+				},
+				success: function(response) {
+					if (response.success) {
+						// Add new option to select
+						const newOption = new Option(response.category.name, response.category.id, true, true);
+						$('#category_id').append(newOption).trigger('change');
+						
+						// Show success message
+						toastr.success(response.message);
+						
+						// Close modal and reset form
+						$('#addCategoryModal').modal('hide');
+						$('#addCategoryForm')[0].reset();
+						$('#category_color').val('#007bff');
+					}
+				},
+				error: function(xhr) {
+					let errorMessage = 'Terjadi kesalahan saat menyimpan kategori';
+					
+					if (xhr.responseJSON && xhr.responseJSON.errors) {
+						const errors = xhr.responseJSON.errors;
+						if (errors.name) {
+							errorMessage = errors.name[0];
+						}
+					} else if (xhr.responseJSON && xhr.responseJSON.message) {
+						errorMessage = xhr.responseJSON.message;
+					}
+					
+					toastr.error(errorMessage);
+				},
+				complete: function() {
+					// Reset button state
+					submitBtn.html(originalText);
+					submitBtn.prop('disabled', false);
+				}
+			});
+		});
+
+		// Reset form when modal is hidden
+		$('#addCategoryModal').on('hidden.bs.modal', function() {
+			$('#addCategoryForm')[0].reset();
+			$('#category_color').val('#007bff');
+		});
+	});
+</script>
+@endpush

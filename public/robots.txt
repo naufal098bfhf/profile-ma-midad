@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /admin-access-itqon
+Disallow: /register
+Disallow: /password/
+Sitemap: https://smpitalitqon.com/sitemap.xml
+
