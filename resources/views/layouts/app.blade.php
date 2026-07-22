@@ -1,52 +1,50 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        @php
-            $siteTitle = \App\Models\Setting::getValue('site_title', config('app.name', 'Laravel'));
-            $siteLogo = \App\Models\Setting::getValue('site_logo');
-            $siteIcon = \App\Models\Setting::getValue('site_icon');
-            $favicon = \App\Models\Setting::getValue('favicon');
-            $metaKeywords = \App\Models\Setting::getValue('meta_keywords');
-            $metaDescription = \App\Models\Setting::getValue('meta_description');
-            $googleAnalytics = \App\Models\Setting::getValue('google_analytics');
+<head>
+    @php
+        $siteTitle = \App\Models\Setting::getValue('site_title', config('app.name', 'Laravel'));
+        $siteLogo = \App\Models\Setting::getValue('site_logo');
+        $siteIcon = \App\Models\Setting::getValue('site_icon');
+        $favicon = \App\Models\Setting::getValue('favicon');
+        $metaKeywords = \App\Models\Setting::getValue('meta_keywords');
+        $metaDescription = \App\Models\Setting::getValue('meta_description');
+        $googleAnalytics = \App\Models\Setting::getValue('google_analytics');
 
-            // Define which routes should be indexed for SEO
-            $indexableRoutes = [
-                'home',
-                'articles.index',
-                'article.detail',
-                'category.show',
-                'author.show',
-                'announcements.index',
-                'announcements.show',
-                'galleries.index',
-                'galleries.show',
-                'pena-karsa.index',
-                'pena-karsa.show',
-                'contact',
-                'ppdb.index',
-                'documents.index'
-            ];
+        $indexableRoutes = [
+            'home',
+            'articles.index',
+            'article.detail',
+            'category.show',
+            'author.show',
+            'announcements.index',
+            'announcements.show',
+            'galleries.index',
+            'galleries.show',
+            'pena-karsa.index',
+            'pena-karsa.show',
+            'contact',
+            'ppdb.index',
+            'documents.index'
+        ];
 
-            $shouldIndex = request()->routeIs($indexableRoutes);
-        @endphp
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="robots" content="{{ $shouldIndex ? 'index,follow' : 'noindex,follow' }}">
-        <link rel="canonical" href="{{ url()->current() }}">
+        $shouldIndex = request()->routeIs($indexableRoutes);
+    @endphp
 
-        <title>@yield('title', $siteTitle)</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        @if(View::hasSection('description'))
-            <meta name="description" content="@yield('description')">
-        @elseif(!empty($metaDescription))
-            <meta name="description" content="{{ $metaDescription }}">
-        @endif
-        @if(!empty($metaKeywords))
-            <meta name="keywords" content="{{ $metaKeywords }}">
-        @endif
+    <title>@yield('title', $siteTitle)</title>
 
+    @if(!empty($siteLogo))
+        <link rel="icon" type="image/png" href="{{ $siteLogo }}">
+        <link rel="shortcut icon" href="{{ $siteLogo }}">
+        <link rel="apple-touch-icon" href="{{ $siteLogo }}">
+    @else
+        <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+        <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
+        <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
+    @endif
         <!-- Open Graph Meta Tags -->
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="{{ $siteTitle }}">

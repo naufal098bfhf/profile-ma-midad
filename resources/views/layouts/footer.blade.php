@@ -30,7 +30,7 @@
                         $contactAddress = \App\Models\Setting::getValue('contact_address', 'Jl. Musi No.17 Sumberejo - Sukodono - Lumajang');
                         $contactEmail = \App\Models\Setting::getValue('contact_email', 'masmiftahulmidad95@gmail.com');
                         $contactWhatsapp = \App\Models\Setting::getValue('contact_whatsapp', '082141242324');
-                        $siteTitle = \App\Models\Setting::getValue('site_title', config('app.name', 'SMPIT Al-Itqon'));
+                        $siteTitle = \App\Models\Setting::getValue('site_title', config('app.name', 'MA Miftahul Midad'));
                     @endphp
                     <p class="mb-1">
                         <i class="fas fa-map-marker-alt"></i>
@@ -52,7 +52,9 @@
 
         <div class="row">
             <div class="col-12 text-center">
-                <small class="text-muted">&copy; {{ date('Y') }} {{ $siteTitle }}. All rights Naufal Hibatullah .</small>
+                <small class="text-muted">
+    &copy; {{ date('Y') }} MA Miftahul Midad. All Rights Reserved.
+</small>
             </div>
         </div>
     </div>

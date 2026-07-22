@@ -46,7 +46,7 @@
 				@endif
 				<form method="POST" action="{{ route('admin.settings.store') }}" enctype="multipart/form-data">
 					@csrf
-					
+
 					<!-- SEO & Website Info -->
 					<div class="row mb-4">
 						<div class="col-12">
@@ -58,24 +58,24 @@
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label for="site_title" class="form-label">Judul Website</label>
-								<input type="text" class="form-control @error('site_title') is-invalid @enderror" id="site_title" name="site_title" value="{{ old('site_title', $site_title) }}" placeholder="SMPIT Al-Itqon">
+								<input type="text" class="form-control @error('site_title') is-invalid @enderror" id="site_title" name="site_title" value="{{ old('site_title', $site_title) }}" placeholder="Miftahul Midad">
 								@error('site_title')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
-							
+
 							<div class="mb-3">
 								<label for="site_subtitle" class="form-label">Subtitle Website</label>
 								<input type="text" class="form-control @error('site_subtitle') is-invalid @enderror" id="site_subtitle" name="site_subtitle" value="{{ old('site_subtitle', $site_subtitle) }}" placeholder="Berita dan Artikel Islami">
 								<small class="form-text text-muted">Subtitle yang ditampilkan di halaman depan</small>
 								@error('site_subtitle')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
-							
+
 							<div class="mb-3">
 								<label for="meta_keywords" class="form-label">Meta Keywords</label>
 								<input type="text" class="form-control @error('meta_keywords') is-invalid @enderror" id="meta_keywords" name="meta_keywords" value="{{ old('meta_keywords', $meta_keywords) }}" placeholder="islam, berita, dakwah">
 								@error('meta_keywords')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
 						</div>
-						
+
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label for="meta_description" class="form-label">Meta Description</label>
@@ -106,7 +106,7 @@
 								@endif
 							</div>
 						</div>
-						
+
 						<div class="col-md-4">
 							<div class="mb-3">
 								<label for="site_icon" class="form-label">Icon Website</label>
@@ -120,7 +120,7 @@
 								@endif
 							</div>
 						</div>
-						
+
 						<div class="col-md-4">
 							<div class="mb-3">
 								<label for="favicon" class="form-label">Favicon</label>
@@ -169,27 +169,27 @@
 								<input type="email" class="form-control @error('contact_email') is-invalid @enderror" id="contact_email" name="contact_email" value="{{ old('contact_email', $contact_email) }}" placeholder="info@sekolah.com">
 								@error('contact_email')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
-							
+
 							<div class="mb-3">
 								<label for="contact_phone" class="form-label">Telepon</label>
 								<input type="text" class="form-control @error('contact_phone') is-invalid @enderror" id="contact_phone" name="contact_phone" value="{{ old('contact_phone', $contact_phone) }}" placeholder="+62 815 1888 930">
 								@error('contact_phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
 						</div>
-						
+
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label for="contact_whatsapp" class="form-label">WhatsApp</label>
 								<input type="text" class="form-control @error('contact_whatsapp') is-invalid @enderror" id="contact_whatsapp" name="contact_whatsapp" value="{{ old('contact_whatsapp', $contact_whatsapp) }}" placeholder="+628151888930">
 								@error('contact_whatsapp')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
-							
+
 							<div class="mb-3">
 								<label for="contact_address" class="form-label">Alamat</label>
 								<textarea class="form-control @error('contact_address') is-invalid @enderror" id="contact_address" name="contact_address" rows="3" placeholder="Jl. KH. Sholeh Iskandar Km.2 Kd. Badak Bogor">{{ old('contact_address', $contact_address) }}</textarea>
 								@error('contact_address')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
-							
+
 							<div class="mb-3">
 								<label for="contact_address_link" class="form-label">Link Google Maps</label>
 								<input type="url" class="form-control @error('contact_address_link') is-invalid @enderror" id="contact_address_link" name="contact_address_link" value="{{ old('contact_address_link', $contact_address_link) }}" placeholder="https://maps.google.com/...">
@@ -216,7 +216,7 @@
 								<textarea class="form-control @error('contact_map_embed') is-invalid @enderror" id="contact_map_embed" name="contact_map_embed" rows="6" placeholder="<iframe src=&quot;https://www.google.com/maps/embed?pb=...&quot; width=&quot;100%&quot; height=&quot;450&quot; style=&quot;border:0;&quot; allowfullscreen=&quot;&quot; loading=&quot;lazy&quot; referrerpolicy=&quot;no-referrer-when-downgrade&quot;></iframe>">{{ old('contact_map_embed', $contact_map_embed) }}</textarea>
 								<small class="form-text text-muted">
 									<i data-feather="info" class="icon-sm me-1"></i>
-									Paste embed code dari Google Maps untuk menampilkan peta di halaman "Hubungi Kami". 
+									Paste embed code dari Google Maps untuk menampilkan peta di halaman "Hubungi Kami".
 									<br><strong>Cara mendapatkan embed code:</strong>
 									<br>1. Buka Google Maps → Cari lokasi sekolah
 									<br>2. Klik "Share" → Pilih "Embed a map"
@@ -242,7 +242,7 @@
 								@error('operational_hours_weekdays')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
 						</div>
-						
+
 						<div class="col-md-4">
 							<div class="mb-3">
 								<label for="operational_hours_saturday" class="form-label">Sabtu</label>
@@ -250,7 +250,7 @@
 								@error('operational_hours_saturday')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
 						</div>
-						
+
 						<div class="col-md-4">
 							<div class="mb-3">
 								<label for="operational_hours_sunday" class="form-label">Minggu</label>
@@ -276,7 +276,7 @@
 								@error('google_analytics')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
 						</div>
-						
+
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label for="facebook_pixel" class="form-label">Facebook Pixel ID</label>
@@ -295,7 +295,7 @@
 								Sosial Media & Sidebar
 							</h6>
 						</div>
-						
+
 						<!-- Toggle Show/Hide Sidebar -->
 						<div class="col-12 mb-3">
 							<div class="form-check form-switch">
@@ -316,7 +316,7 @@
 								<input type="url" class="form-control @error('instagram_url') is-invalid @enderror" id="instagram_url" name="instagram_url" value="{{ old('instagram_url', $instagram_url) }}" placeholder="https://instagram.com/username">
 								@error('instagram_url')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
-							
+
 							<div class="mb-3">
 								<label for="tiktok_url" class="form-label">
 									<i class="fab fa-tiktok text-dark me-1"></i>
@@ -326,7 +326,7 @@
 								@error('tiktok_url')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
 						</div>
-						
+
 						<div class="col-md-6">
 							<div class="mb-3">
 								<label for="facebook_url" class="form-label">
@@ -336,7 +336,7 @@
 								<input type="url" class="form-control @error('facebook_url') is-invalid @enderror" id="facebook_url" name="facebook_url" value="{{ old('facebook_url', $facebook_url) }}" placeholder="https://facebook.com/username">
 								@error('facebook_url')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
-							
+
 							<div class="mb-3">
 								<label for="youtube_url" class="form-label">
 									<i class="fab fa-youtube text-danger me-1"></i>
@@ -345,7 +345,7 @@
 								<input type="url" class="form-control @error('youtube_url') is-invalid @enderror" id="youtube_url" name="youtube_url" value="{{ old('youtube_url', $youtube_url) }}" placeholder="https://youtube.com/@username">
 								@error('youtube_url')<div class="invalid-feedback">{{ $message }}</div>@enderror
 							</div>
-							
+
 							<div class="mb-3">
 								<label for="whatsapp_url" class="form-label">
 									<i class="fab fa-whatsapp text-success me-1"></i>
@@ -357,7 +357,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="d-flex justify-content-end">
 						<button type="submit" class="btn btn-primary">
 							<i data-feather="save" class="icon-sm me-2"></i>

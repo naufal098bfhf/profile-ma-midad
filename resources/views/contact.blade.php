@@ -170,7 +170,7 @@
                     <!-- Contact Info -->
                     <div class="contact-info mb-4">
                         @php
-                            $contactAddress = \App\Models\Setting::getValue('contact_address', 'Jl. Musi No.17 Sumberejo - Sukodono - Lumajangr');
+                            $contactAddress = \App\Models\Setting::getValue('contact_address', 'Jl. Musi No.17 Sumberejo - Sukodono - Lumajang');
                             $contactPhone = \App\Models\Setting::getValue('contact_phone', '0821 1424 2324');
                             $contactEmail = \App\Models\Setting::getValue('contact_email', 'mamiftahulmidad95@gmail.com');
                             $contactWhatsapp = \App\Models\Setting::getValue('contact_whatsapp', '0821 1424 2324');

@@ -17,10 +17,10 @@ Route::middleware('guest')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('admin-access-itqon', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
+   Route::get('admin-access-midad', [AuthenticatedSessionController::class, 'create'])
+    ->name('login');
 
-    Route::post('admin-access-itqon', [AuthenticatedSessionController::class, 'store']);
+Route::post('admin-access-midad', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
