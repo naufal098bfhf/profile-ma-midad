@@ -29,7 +29,7 @@
                     @php
                         $contactAddress = \App\Models\Setting::getValue('contact_address', 'Jl. Musi No.17 Sumberejo - Sukodono - Lumajang');
                         $contactEmail = \App\Models\Setting::getValue('contact_email', 'masmiftahulmidad95@gmail.com');
-                        $contactWhatsapp = \App\Models\Setting::getValue('contact_whatsapp', '082141242324');
+                        $contactWhatsapp = \App\Models\Setting::getValue('contact_whatsapp', '0878 2413 8050');
                         $siteTitle = \App\Models\Setting::getValue('site_title', config('app.name', 'MA Miftahul Midad'));
                     @endphp
                     <p class="mb-1">
@@ -53,7 +53,7 @@
         <div class="row">
             <div class="col-12 text-center">
                 <small class="text-muted">
-    &copy; {{ date('Y') }} MA Miftahul Midad. All Rights Reserved.
+    &copy; {{ date('Y') }} Naufal H Dev. All Rights Reserved.
 </small>
             </div>
         </div>
