@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Hubungi Kami - SMPIT Al-Itqon')
+@section('title', 'Hubungi Kami - MA Miftahul Midad')
 @section('description', 'Hubungi kami untuk informasi lebih lanjut tentang Madrsah')
 
 @section('meta')
 <meta name="description" content="Hubungi kami untuk informasi lebih lanjut tentang Madrasah. Kirim pesan atau kunjungi lokasi Madrasah kami di Jl. KH. Sholeh Iskandar Km.2 Kd. Badak Bogor.">
 <meta name="keywords" content="kontak Madrasah, hubungi kami, lokasi Madrasah, alamat Madrasah, informasi Madrasah">
-<meta property="og:title" content="Hubungi Kami - SMPIT Al-Itqon">
+<meta property="og:title" content="Hubungi Kami - MA Miftahul Midad">
 <meta property="og:description" content="Hubungi kami untuk informasi lebih lanjut tentang Madrasah">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{{ url()->current() }}">

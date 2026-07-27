@@ -222,6 +222,43 @@ License: For each use you must have a valid license purchased only from above li
 							</ul>
 						</div>
 					</li>
+                    <li class="nav-item">
+    @php
+        $teachersOpen = str_contains(request()->route()->getName(), 'admin.teachers');
+    @endphp
+
+    <a class="nav-link"
+       data-bs-toggle="collapse"
+       href="#teachers"
+       role="button"
+       aria-expanded="{{ $teachersOpen ? 'true' : 'false' }}"
+       aria-controls="teachers">
+
+        <i class="link-icon" data-feather="users"></i>
+        <span class="link-title">Guru</span>
+        <i class="link-arrow" data-feather="chevron-down"></i>
+    </a>
+
+    <div class="collapse {{ $teachersOpen ? 'show' : '' }}" id="teachers">
+        <ul class="nav sub-menu">
+
+            <li class="nav-item">
+                <a href="{{ route('admin.teachers.index') }}"
+                   class="nav-link {{ request()->routeIs('admin.teachers.index') || request()->routeIs('admin.teachers.show') || request()->routeIs('admin.teachers.edit') ? 'active' : '' }}">
+                    Daftar Guru
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('admin.teachers.create') }}"
+                   class="nav-link {{ request()->routeIs('admin.teachers.create') ? 'active' : '' }}">
+                    Tambah Guru
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</li>
 					<li class="nav-item">
 						@php $announcementsOpen = str_contains(request()->route()->getName(), 'admin.announcements'); @endphp
 						<a class="nav-link" data-bs-toggle="collapse" href="#announcements" role="button" aria-expanded="{{ $announcementsOpen ? 'true' : 'false' }}" aria-controls="announcements">
