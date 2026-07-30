@@ -165,7 +165,38 @@
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Kontak</a>
                 </li>
+                <li class="nav-item ms-lg-3">
+    <a href="https://erapor.masmiftahulmidad.sch.id/"
+       target="_blank"
+       class="rdm-btn">
+        <i class="bi bi-box-arrow-up-right"></i>
+        <span>RDM</span>
+    </a>
+</li>
             </ul>
         </div>
     </div>
 </nav>
+
+<style>.rdm-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:.5rem;
+
+    padding:.55rem 1.2rem;
+    border:1.5px solid #2563eb;
+    border-radius:999px;
+
+    background:#fff;
+    color:#2563eb !important;
+
+    text-decoration:none;
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.rdm-btn:hover{
+    background:#2563eb;
+    color:#fff !important;
+}</style>
