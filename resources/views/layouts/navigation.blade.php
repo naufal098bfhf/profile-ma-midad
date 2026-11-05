@@ -1,202 +1,468 @@
-<!-- Custom Style untuk UI Premium & Modern -->
 <style>
-    /* Efek Glassmorphism pada Navbar */
-    .navbar-premium {
-        background: rgba(255, 255, 255, 0.92) !important;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(229, 231, 235, 0.6);
-        transition: all 0.3s ease-in-out;
+/* ==========================================================
+   MA MIFTAHUL MIDAD
+   Public navigation | Turquoise identity
+   ========================================================== */
+
+:root {
+    --madrasah-primary: #08B4AD;
+    --madrasah-primary-hover: #078F89;
+    --madrasah-primary-dark: #087F74;
+    --madrasah-primary-soft: #E8F8F6;
+    --madrasah-text: #263B3A;
+    --madrasah-muted: #687C79;
+    --madrasah-border: #E1EEEB;
+    --madrasah-white: #FFFFFF;
+    --madrasah-shadow: 0 8px 28px rgba(24, 74, 68, .075);
+}
+
+/* Main navigation bar */
+.madrasah-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    width: 100%;
+    padding: 10px 0;
+    background: rgba(255, 255, 255, .97);
+    border-bottom: 1px solid var(--madrasah-border);
+    box-shadow: 0 3px 16px rgba(24, 74, 68, .045);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+}
+
+.madrasah-navbar .container {
+    max-width: 1440px;
+}
+
+/* Brand: logo and school identity */
+.madrasah-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    flex: 0 0 auto;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    text-decoration: none !important;
+}
+
+.madrasah-brand-logo {
+    display: block;
+    width: auto;
+    max-width: 58px;
+    height: 52px;
+    object-fit: contain;
+    transition: opacity .2s ease;
+}
+
+.madrasah-brand:hover .madrasah-brand-logo {
+    opacity: .88;
+}
+
+.madrasah-brand-copy {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    line-height: 1.15;
+}
+
+.madrasah-brand-title {
+    color: var(--madrasah-primary-dark);
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    font-size: .98rem;
+    font-weight: 800;
+    letter-spacing: .2px;
+    white-space: nowrap;
+}
+
+.madrasah-brand-subtitle {
+    color: var(--madrasah-muted);
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    font-size: .69rem;
+    font-weight: 500;
+    letter-spacing: .05px;
+    white-space: nowrap;
+}
+
+/* Navigation list */
+.madrasah-menu {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.madrasah-navbar .madrasah-menu .nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    margin: 0;
+    padding: 10px 10px !important;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--madrasah-text) !important;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    font-size: .82rem;
+    font-weight: 600;
+    line-height: 1.35;
+    white-space: nowrap;
+    transition: color .18s ease, background-color .18s ease;
+}
+
+.madrasah-navbar .madrasah-menu .nav-link:hover {
+    background: #F2FAF8;
+    color: var(--madrasah-primary-dark) !important;
+}
+
+.madrasah-navbar .madrasah-menu .nav-link.active {
+    background: var(--madrasah-primary-soft);
+    color: var(--madrasah-primary-dark) !important;
+    font-weight: 750;
+}
+
+.madrasah-navbar .madrasah-menu .nav-link.active::after {
+    position: absolute;
+    right: 11px;
+    bottom: 3px;
+    left: 11px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--madrasah-primary);
+    content: "";
+}
+
+/* Action links: PPDB and RDM */
+.madrasah-ppdb,
+.madrasah-rdm {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 40px;
+    padding: 10px 13px;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    font-size: .81rem;
+    font-weight: 750;
+    line-height: 1;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition:
+        background-color .18s ease,
+        border-color .18s ease,
+        color .18s ease,
+        box-shadow .18s ease,
+        transform .18s ease;
+}
+
+.madrasah-ppdb {
+    margin-left: 5px;
+    background: var(--madrasah-primary);
+    border-color: var(--madrasah-primary);
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 12px rgba(8, 180, 173, .16);
+}
+
+.madrasah-ppdb:hover,
+.madrasah-ppdb.active {
+    transform: translateY(-1px);
+    background: var(--madrasah-primary-hover);
+    border-color: var(--madrasah-primary-hover);
+    color: #FFFFFF !important;
+    box-shadow: 0 7px 16px rgba(8, 143, 137, .19);
+}
+
+.madrasah-ppdb i,
+.madrasah-rdm i {
+    font-size: .92rem;
+}
+
+.madrasah-rdm {
+    margin-left: 2px;
+    background: #FFFFFF;
+    border-color: #B9DFDA;
+    color: var(--madrasah-primary-dark) !important;
+}
+
+.madrasah-rdm:hover {
+    background: var(--madrasah-primary-soft);
+    border-color: var(--madrasah-primary);
+    color: var(--madrasah-primary-dark) !important;
+}
+
+/* Mobile menu toggle */
+.madrasah-toggler {
+    display: inline-flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 7px;
+    border: 1px solid var(--madrasah-border) !important;
+    border-radius: 10px;
+    background: #FFFFFF;
+    box-shadow: none !important;
+}
+
+.madrasah-toggler:hover {
+    background: var(--madrasah-primary-soft);
+    border-color: #B9DFDA !important;
+}
+
+.madrasah-toggler:focus-visible {
+    outline: 3px solid rgba(8, 180, 173, .25);
+    outline-offset: 2px;
+}
+
+.madrasah-toggler .navbar-toggler-icon {
+    width: 21px;
+    height: 21px;
+}
+
+/* Keyboard accessibility */
+.madrasah-navbar a:focus-visible {
+    outline: 3px solid rgba(8, 180, 173, .3);
+    outline-offset: 2px;
+}
+
+/* Tablet and mobile layout */
+@media (max-width: 1199.98px) {
+    .madrasah-navbar .container {
+        max-width: 100%;
     }
 
-    /* Transisi Logo & Efek Hover */
-    .navbar-brand {
-        text-decoration: none !important;
-    }
-    .navbar-brand img {
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .navbar-brand:hover img {
-        transform: scale(1.05);
+    .madrasah-menu {
+        align-items: stretch;
+        gap: 4px;
+        margin-top: 13px;
+        padding-top: 13px;
+        border-top: 1px solid var(--madrasah-border);
     }
 
-    /* Styling Teks Brand (Samping Logo) */
-    .brand-text-wrapper {
-        line-height: 1.1;
-    }
-    .brand-title {
-        font-size: 1.15rem;
-        font-weight: 800;
-        color: #1e3a8a; /* Warna Biru Tua Elegan sesuai gambar */
-        letter-spacing: 0.5px;
-        margin-bottom: 3px;
-        font-family: 'Arial', 'Helvetica', sans-serif;
-    }
-    .brand-subtitle {
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: #475569; /* Warna Abu-abu kebiruan untuk kontras yang pas */
-        letter-spacing: 0.3px;
+    .madrasah-navbar .madrasah-menu .nav-link {
+        width: 100%;
+        min-height: 42px;
+        justify-content: flex-start;
+        padding: 11px 14px !important;
     }
 
-    /* Penyesuaian ukuran teks untuk layar kecil (Mobile) */
-    @media (max-width: 576px) {
-        .brand-title {
-            font-size: 0.95rem;
-        }
-        .brand-subtitle {
-            font-size: 0.65rem;
-        }
-        .navbar-brand img {
-            height: 50px !important;
-        }
+    .madrasah-navbar .madrasah-menu .nav-link.active::after {
+        top: 10px;
+        bottom: 10px;
+        left: 0;
+        width: 3px;
+        height: auto;
+        border-radius: 3px;
     }
 
-    /* Tipografi & Item Navigasi */
-    .navbar-nav .nav-link {
-        font-weight: 500;
-        font-size: 0.95rem;
-        color: #4b5563 !important;
-        padding: 0.6rem 1rem !important;
-        margin: 0 0.15rem;
-        border-radius: 8px;
-        transition: all 0.25s ease;
-        position: relative;
+    .madrasah-ppdb,
+    .madrasah-rdm {
+        width: 100%;
+        min-height: 43px;
+        justify-content: center;
+        margin: 5px 0 0;
     }
 
-    /* Efek Hover Nav Item */
-    .navbar-nav .nav-link:hover {
-        color: #0f172a !important;
-        background-color: rgba(241, 245, 249, 0.8);
+    .madrasah-ppdb {
+        margin-top: 10px;
+    }
+}
+
+/* Small phones */
+@media (max-width: 575.98px) {
+    .madrasah-navbar {
+        padding: 9px 0;
     }
 
-    /* Indikator Status Aktif yang Elegan */
-    .navbar-nav .nav-link.active {
-        color: #1d4ed8 !important; /* Sesuaikan dengan warna utama merek sekolah */
-        font-weight: 600;
-        background-color: rgba(29, 78, 216, 0.08);
+    .madrasah-brand {
+        max-width: calc(100% - 54px);
+        gap: 9px;
     }
 
-    /* Tombol Toggler Mobile yang Bersih (Tanpa Border Kasar) */
-    .navbar-toggler {
-        border: none !important;
-        padding: 0.5rem;
-    }
-    .navbar-toggler:focus {
-        box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15) !important;
+    .madrasah-brand-logo {
+        max-width: 47px;
+        height: 44px;
     }
 
-    /* Desain Dropdown Modern & Floating */
-    .dropdown-menu-premium {
-        border: none;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-        padding: 0.5rem;
-        margin-top: 0.75rem !important;
-        background: #ffffff;
+    .madrasah-brand-copy {
+        gap: 4px;
     }
 
-    .dropdown-menu-premium .dropdown-item {
-        border-radius: 8px;
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: #334155;
-        transition: all 0.2s ease;
+    .madrasah-brand-title {
+        font-size: .81rem;
+        letter-spacing: .05px;
+        white-space: normal;
     }
 
-    .dropdown-menu-premium .dropdown-item:hover {
-        background-color: #f8fafc;
-        color: #1d4ed8;
-        transform: translateX(3px);
+    .madrasah-brand-subtitle {
+        font-size: .62rem;
+        white-space: normal;
     }
 
-    /* Tombol Logout Khusus */
-    .btn-logout-item {
-        color: #ef4444 !important;
+    .madrasah-toggler {
+        width: 39px;
+        height: 39px;
     }
-    .btn-logout-item:hover {
-        background-color: rgba(239, 68, 68, 0.08) !important;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .madrasah-navbar *,
+    .madrasah-navbar *::before,
+    .madrasah-navbar *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
     }
+}
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-light navbar-premium shadow-sm sticky-top py-2">
+<nav class="navbar navbar-expand-xl madrasah-navbar">
     <div class="container">
-        <!-- Brand Logo & Teks -->
-        <a class="navbar-brand d-flex align-items-center gap-3" href="{{ route('home') }}">
-            <img src="{{ asset('images/logo.png') }}"
-                 alt="MA Miftahul Midad"
-                 style="height:60px; width:auto;">
 
-            <div class="brand-text-wrapper d-flex flex-column">
-                <span class="brand-title">MA MIFTAHUL MIDAD</span>
-                <span class="brand-subtitle">Sumberejo • Sukodono • Lumajang</span>
-            </div>
+        {{-- Brand: logo dan identitas madrasah --}}
+        <a
+            class="navbar-brand madrasah-brand"
+            href="{{ route('home') }}"
+            aria-label="Beranda MA Miftahul Midad"
+        >
+            <img
+                src="{{ asset('images/logo.png') }}"
+                alt="Logo MA Miftahul Midad"
+                class="madrasah-brand-logo"
+            >
+
+            <span class="madrasah-brand-copy">
+                <span class="madrasah-brand-title">MA MIFTAHUL MIDAD</span>
+                <span class="madrasah-brand-subtitle">Sumberejo · Sukodono · Lumajang</span>
+            </span>
         </a>
 
-        <!-- Mobile Toggler -->
-        <button class="navbar-toggler rounded-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        {{-- Tombol navigasi untuk tablet dan ponsel --}}
+        <button
+            class="navbar-toggler madrasah-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#madrasahNavbar"
+            aria-controls="madrasahNavbar"
+            aria-expanded="false"
+            aria-label="Buka atau tutup menu navigasi"
+        >
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navigation Links -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center">
+        {{-- Navigasi utama --}}
+        <div class="collapse navbar-collapse" id="madrasahNavbar">
+            <ul class="navbar-nav ms-auto madrasah-menu">
+
+                {{-- 1. Beranda --}}
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Beranda</a>
+                    <a
+                        class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}"
+                        href="{{ route('home') }}"
+                        @if(request()->routeIs('home')) aria-current="page" @endif
+                    >Beranda</a>
+                </li>
+
+                {{-- 2. Profil madrasah --}}
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->routeIs('public.institution-profile') ? 'active' : '' }}"
+                        href="{{ route('public.institution-profile') }}"
+                        @if(request()->routeIs('public.institution-profile')) aria-current="page" @endif
+                    >Profil</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('announcements.*') ? 'active' : '' }}" href="{{ route('announcements.index') }}">Pengumuman</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('articles.*') ? 'active' : '' }}" href="{{ route('articles.index') }}">Berita</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('pena-karsa.*') ? 'active' : '' }}" href="{{ route('pena-karsa.index') }}">Pena Karsa</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('galleries.*') ? 'active' : '' }}" href="{{ route('galleries.index') }}">Galeri</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Kontak</a>
-                </li>
-                <li class="nav-item ms-lg-3">
-    <a href="https://erapor.masmiftahulmidad.sch.id/"
-       target="_blank"
-       class="rdm-btn">
-        <i class="bi bi-box-arrow-up-right"></i>
-        <span>RDM</span>
+    <a class="nav-link {{ request()->routeIs('institution-history.index') ? 'active' : '' }}"
+       href="{{ route('institution-history.index') }}">
+        Sejarah
     </a>
 </li>
+
+                {{-- 3. Program madrasah --}}
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->routeIs('programs.index') ? 'active' : '' }}"
+                        href="{{ route('admin.programs.index') }}"
+                        @if(request()->routeIs('programs.index')) aria-current="page" @endif
+                    >Program</a>
+                </li>
+
+                {{-- 4. Berita --}}
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->routeIs('articles.*') ? 'active' : '' }}"
+                        href="{{ route('articles.index') }}"
+                        @if(request()->routeIs('articles.*')) aria-current="page" @endif
+                    >Berita</a>
+                </li>
+
+                {{-- 5. Pengumuman --}}
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->routeIs('announcements.*') ? 'active' : '' }}"
+                        href="{{ route('announcements.index') }}"
+                        @if(request()->routeIs('announcements.*')) aria-current="page" @endif
+                    >Pengumuman</a>
+                </li>
+
+                {{-- 6. Pena Karsa --}}
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->routeIs('pena-karsa.*') ? 'active' : '' }}"
+                        href="{{ route('pena-karsa.index') }}"
+                        @if(request()->routeIs('pena-karsa.*')) aria-current="page" @endif
+                    >Pena Karsa</a>
+                </li>
+
+                {{-- 7. Galeri --}}
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->routeIs('galleries.*') ? 'active' : '' }}"
+                        href="{{ route('galleries.index') }}"
+                        @if(request()->routeIs('galleries.*')) aria-current="page" @endif
+                    >Galeri</a>
+                </li>
+
+                {{-- 8. Kontak --}}
+                <li class="nav-item">
+                    <a
+                        class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}"
+                        href="{{ route('contact') }}"
+                        @if(request()->routeIs('contact')) aria-current="page" @endif
+                    >Kontak</a>
+                </li>
+
+                {{-- Aksi utama: pendaftaran peserta didik --}}
+                <li class="nav-item">
+                    <a
+                        href="{{ route('ppdb.index') }}"
+                        class="madrasah-ppdb {{ request()->routeIs('ppdb.*') ? 'active' : '' }}"
+                        @if(request()->routeIs('ppdb.*')) aria-current="page" @endif
+                    >
+                        <i class="bi bi-mortarboard-fill" aria-hidden="true"></i>
+                        <span>PPDB</span>
+                    </a>
+                </li>
+
+                {{-- Akses eksternal: Rapor Digital Madrasah --}}
+                <li class="nav-item">
+                    <a
+                        href="https://erapor.masmiftahulmidad.sch.id/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="madrasah-rdm"
+                    >
+                        <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+                        <span>RDM</span>
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>
 </nav>
-
-<style>.rdm-btn{
-    display:inline-flex;
-    align-items:center;
-    gap:.5rem;
-
-    padding:.55rem 1.2rem;
-    border:1.5px solid #2563eb;
-    border-radius:999px;
-
-    background:#fff;
-    color:#2563eb !important;
-
-    text-decoration:none;
-    font-weight:600;
-
-    transition:.25s;
-}
-
-.rdm-btn:hover{
-    background:#2563eb;
-    color:#fff !important;
-}</style>

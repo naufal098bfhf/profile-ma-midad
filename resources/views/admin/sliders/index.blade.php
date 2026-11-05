@@ -20,7 +20,7 @@
 				</div>
 				<div class="row align-items-start">
 					<div class="col-md-7">
-						<p class="text-muted tx-13 mb-3 mb-md-0">Kelola semua slider SMPIT Al-Itqon. Anda dapat menambah, mengedit, atau menghapus slider.</p>
+						<p class="text-muted tx-13 mb-3 mb-md-0">Kelola semua slider MAS Miftahul Midad. Anda dapat menambah, mengedit, atau menghapus slider.</p>
 					</div>
 					<div class="col-md-5 d-flex justify-content-md-end">
 						<a href="{{ route('admin.sliders.create') }}" class="btn btn-primary mb-3 mb-md-0">
@@ -142,7 +142,7 @@
 <script>
 	$(function() {
 		'use strict';
-		
+
 		$('#dataTableExample').DataTable({
 			"aLengthMenu": [
 				[10, 30, 50, -1],

@@ -21,7 +21,7 @@
 				</div>
 				<div class="row align-items-start">
 					<div class="col-md-7">
-						<p class="text-muted tx-13 mb-3 mb-md-0">Detail lengkap artikel SMPIT Al-Itqon.</p>
+						<p class="text-muted tx-13 mb-3 mb-md-0">Detail lengkap artikel MAS Miftahul Midad.</p>
 					</div>
 				</div>
 			</div>
@@ -42,7 +42,7 @@
 									{{ $article->status === 'published' ? 'Terbit' : 'Draft' }}
 								</span>
 								<small class="text-muted">
-									Oleh: {{ $article->author->name }} | 
+									Oleh: {{ $article->author->name }} |
 									{{ $article->published_at ? $article->published_at->format('d M Y H:i') : 'Belum diterbitkan' }}
 								</small>
 							</div>
@@ -71,7 +71,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h6 class="card-title">Informasi Artikel</h6>
-								
+
 								<div class="mb-3">
 									<label class="form-label fw-bold">Penulis:</label>
 									<p class="mb-0">{{ $article->author->name }}</p>

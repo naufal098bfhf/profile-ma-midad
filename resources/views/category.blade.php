@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kategori: ' . $categoryName . ' - SMPIT Al-Itqon')
+@section('title', 'Kategori: ' . $categoryName . ' - MAS Miftahul Midad')
 
 @section('content')
 <div class="container mt-4">
@@ -10,7 +10,7 @@
                 <h1 class="category-title">Kategori: {{ $categoryName }}</h1>
                 <p class="category-description">Artikel-artikel dalam kategori {{ $categoryName }}</p>
             </div>
-            
+
             <div class="row">
                 @foreach($articles as $article)
                 <div class="col-md-4 mb-4">
@@ -47,12 +47,12 @@
                 </div>
                 @endforeach
             </div>
-            
+
             <!-- Pagination -->
             <div class="d-flex justify-content-center mt-4">
                 {{ $articles->links() }}
             </div>
-            
+
             @if($articles->isEmpty())
             <div class="text-center py-5">
                 <h3>Tidak ada artikel dalam kategori ini</h3>

@@ -20,7 +20,7 @@
 				</div>
 				<div class="row align-items-start">
 					<div class="col-md-7">
-						<p class="text-muted tx-13 mb-3 mb-md-0">Edit kategori SMPIT Al-Itqon.</p>
+						<p class="text-muted tx-13 mb-3 mb-md-0">Edit kategori MAS Miftahul Midad.</p>
 					</div>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 				<form class="forms-sample" method="POST" action="{{ route('admin.article-categories.update', $category) }}">
 					@csrf
 					@method('PUT')
-					
+
 					<div class="row">
 						<div class="col-md-8">
 							<div class="mb-3">
@@ -93,7 +93,7 @@
 <script>
 	$(function() {
 		'use strict';
-		
+
 		// Auto generate slug from name
 		$('#name').on('input', function() {
 			var name = $(this).val();

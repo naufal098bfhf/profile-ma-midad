@@ -10,7 +10,7 @@
     <meta property="og:description" content="{{ $announcement->summary }}">
     <meta property="og:url" content="{{ request()->url() }}">
     <meta property="og:locale" content="id_ID">
-    <meta property="article:author" content="SMPIT Al-Itqon">
+    <meta property="article:author" content="MAS Miftahul Midad">
     <meta property="article:published_time" content="{{ $announcement->published_at->toISOString() }}">
     <meta property="article:section" content="Pengumuman">
     @if($announcement->category)
@@ -36,7 +36,7 @@
         <meta property="og:image:height" content="630">
         <meta property="og:image:type" content="image/jpeg">
     @endif
-    
+
     <!-- Twitter Card Meta Tags for Announcement -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{ $announcement->title }} - Pengumuman">
@@ -64,9 +64,9 @@
                             {{ $announcement->published_at->format('d M Y, H:i') }}
                         </small>
                     </div>
-                    
+
                     <h1 class="announcement-title">{{ $announcement->title }}</h1>
-                    
+
                     <div class="announcement-stats">
                         <small class="text-muted">
                             <i class="fas fa-eye"></i> {{ $announcement->views }} kali dilihat
@@ -149,7 +149,7 @@
                     <a href="{{ route('announcements.index') }}" class="btn btn-outline-primary">
                         <i class="fas fa-arrow-left"></i> Kembali ke Daftar
                     </a>
-                    
+
                     <div class="float-end">
                         <a href="https://wa.me/?text={{ urlencode($announcement->title . ' - ' . ($shortlinkUrl ?? route('announcements.show', $announcement->slug))) }}" target="_blank" rel="noopener" class="btn btn-success">
                             <i class="fab fa-whatsapp"></i> Bagikan via WhatsApp
@@ -336,15 +336,15 @@
     .announcement-detail {
         padding: 1.5rem;
     }
-    
+
     .announcement-title {
         font-size: 1.8rem;
     }
-    
+
     .announcement-actions {
         text-align: center;
     }
-    
+
     .announcement-actions .float-end {
         float: none !important;
         margin-top: 1rem;

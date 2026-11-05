@@ -1,505 +1,666 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portal Resmi dan Sistem Manajemen MA Miftahul Midad">
     <meta name="author" content="MA Miftahul Midad">
 
     @php
-        $siteTitle = \App\Models\Setting::getValue('site_title', 'MA Miftahul Midad');
+        $siteTitle = \App\Models\Setting::getValue(
+            'site_title',
+            'MA Miftahul Midad'
+        );
     @endphp
 
-    <title>Login Sistem - {{ $siteTitle }}</title>
+    <title>Login - {{ $siteTitle }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- core:css -->
+    <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('template/assets/vendors/core/core.css') }}">
-
-    <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('template/assets/fonts/feather-font/css/iconfont.css') }}">
-    <link rel="stylesheet" href="{{ asset('template/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
 
-    <!-- Layout styles -->
-    <link rel="stylesheet" href="{{ asset('template/assets/css/demo1/style.css') }}">
-    <link rel="shortcut icon" href="{{ asset('template/assets/images/favicon.png') }}" />
-
-    <!-- Ultra-Professional Custom Styling (Conflict-Free) -->
     <style>
         :root {
-            --primary-emerald: #045c42;
-            --primary-hover: #034833;
-            --dark-emerald: #022c1f;
-            --accent-gold: #d4af37;
-            --light-gold: #fef9e7;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
-            --border-color: #e2e8f0;
-            --bg-input: #f8fafc;
+            --green: #087f68;
+            --green-dark: #075b4c;
+            --green-soft: #eaf5f1;
+            --text: #172b27;
+            --muted: #75847f;
+            --border: #e5ece9;
+            --background: #f5f8f7;
         }
 
         * {
             box-sizing: border-box;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Override Template Backgrounds */
-        body, html, .main-wrapper, .page-wrapper, .page-content {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-            background-color: #0b1120 !important;
-            background-image:
-                radial-gradient(at 0% 0%, rgba(4, 92, 66, 0.3) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(212, 175, 55, 0.15) 0px, transparent 50%),
-                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px) !important;
-            background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px !important;
-            background-position: 0 0, 0 0, -1px -1px, -1px -1px !important;
-            min-height: 100vh !important;
+        html,
+        body {
+            min-height: 100%;
             margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text);
         }
 
-        .page-content {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            padding: 2rem 1rem !important;
-            min-height: 100vh !important;
+        body {
+            background: var(--background);
         }
 
-        /* Card Container */
-        .auth-page .card {
-            border: 1px solid rgba(255, 255, 255, 0.15) !important;
-            border-radius: 24px !important;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05) !important;
-            overflow: hidden !important;
-            background: #ffffff !important;
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(8,127,104,.055), transparent 28%),
+                radial-gradient(circle at 90% 90%, rgba(8,127,104,.045), transparent 28%),
+                #f5f8f7;
+        }
+
+        .login-container {
             width: 100%;
-            transition: all 0.3s ease;
+            max-width: 1000px;
         }
 
-        /* Left Side Banner (Branding) - Force Dark Gradient */
-        .custom-auth-banner {
-            background: linear-gradient(135deg, #022c1f 0%, #045c42 55%, #087f5b 100%) !important;
+        .login-card {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            background: #fff;
+            border: 1px solid rgba(220,232,226,.9);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(22,55,43,.075);
+        }
+
+        /* BRAND PANEL */
+
+        .brand-panel {
             position: relative;
-            height: 100%;
-            padding: 3.5rem 3rem !important;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            min-height: 570px;
+            padding: 48px 42px 35px;
+            color: #fff;
+            background: var(--green-dark);
             overflow: hidden;
+        }
+
+        .brand-panel::before {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 50%;
+            top: -145px;
+            right: -135px;
+        }
+
+        .brand-panel::after {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 50%;
+            bottom: -120px;
+            left: -100px;
+        }
+
+        .brand-content,
+        .brand-footer {
+            position: relative;
             z-index: 1;
         }
 
-        .custom-auth-banner::before {
-            content: "";
-            position: absolute;
-            top: -20%;
-            right: -20%;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 75px;
         }
 
-        .custom-auth-banner::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            top: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.6;
-            pointer-events: none;
-            z-index: -1;
+        .brand-logo img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            background: #fff;
+            padding: 5px;
+            border-radius: 12px;
         }
 
-        .badge-portal {
+        .brand-logo-text {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.5;
+            letter-spacing: .2px;
+        }
+
+        .brand-label {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(212, 175, 55, 0.2) !important;
-            color: #fede88 !important;
-            border: 1px solid rgba(212, 175, 55, 0.4) !important;
-            padding: 0.4rem 1rem;
-            border-radius: 50px;
-            font-size: 0.72rem;
+            gap: 8px;
+            color: #c5e6dc;
+            font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.8px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            width: fit-content;
+            margin-bottom: 22px;
         }
 
-        .custom-auth-banner h2 {
-            font-weight: 800 !important;
-            letter-spacing: -0.8px;
-            color: #ffffff !important;
-            font-size: 2.2rem !important;
-            line-height: 1.25 !important;
-            margin-bottom: 1rem !important;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        .brand-label::before {
+            content: "";
+            width: 22px;
+            height: 2px;
+            background: #a7d9c9;
         }
 
-        .custom-auth-banner p {
-            color: #f1f5f9 !important;
-            font-size: 0.95rem !important;
-            line-height: 1.7 !important;
+        .brand-panel h1 {
+            font-size: clamp(27px, 3vw, 36px);
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: -1.2px;
+            color: #fff;
+            margin-bottom: 18px;
+        }
+
+        .brand-description {
+            max-width: 340px;
+            color: rgba(255,255,255,.76);
+            font-size: 13px;
+            line-height: 1.9;
             font-weight: 400;
-            opacity: 0.9;
         }
 
-        /* Right Side Form */
-        .auth-form-wrapper {
-            padding: 4rem 3.5rem !important;
+        .brand-divider {
+            height: 1px;
+            background: rgba(255,255,255,.15);
+            margin-bottom: 20px;
+        }
+
+        .brand-footer {
+            color: rgba(255,255,255,.65);
+            font-size: 10px;
+            line-height: 1.8;
+        }
+
+        /* FORM PANEL */
+
+        .form-panel {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100%;
-            background-color: #ffffff !important;
+            padding: 65px 65px;
+            background: #fff;
         }
 
-        .brand-title {
-            font-size: 1.5rem;
+        .form-heading {
+            margin-bottom: 35px;
+        }
+
+        .form-heading .eyebrow {
+            display: block;
+            color: var(--green);
+            font-size: 10px;
             font-weight: 800;
-            color: var(--dark-emerald);
-            letter-spacing: -0.5px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
+            letter-spacing: 1.7px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
         }
 
-        .brand-title span {
-            color: var(--accent-gold);
-            font-size: 2rem;
-            line-height: 0;
-            margin-left: 2px;
+        .form-heading h2 {
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -.8px;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .form-heading p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+            margin: 0;
         }
 
         .form-label {
-            font-weight: 700 !important;
-            font-size: 0.75rem !important;
-            color: var(--text-dark) !important;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-            margin-bottom: 0.5rem;
+            display: block;
+            color: #33453f;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 9px;
         }
 
-        .input-group-custom {
+        .field-wrapper {
             position: relative;
-            display: flex;
-            align-items: center;
         }
 
-        .input-group-custom .feather {
+        .field-wrapper .field-icon {
             position: absolute;
-            left: 1.15rem;
-            color: #94a3b8;
-            width: 18px;
-            height: 18px;
-            transition: all 0.25s ease;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #91a29a;
+            font-size: 16px;
             pointer-events: none;
-            z-index: 4;
         }
 
         .form-control-custom {
             width: 100%;
-            padding: 0.85rem 1rem 0.85rem 3.2rem !important;
-            border-radius: 12px !important;
-            border: 1.5px solid var(--border-color) !important;
-            font-size: 0.92rem !important;
+            height: 49px;
+            padding: 0 15px 0 44px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            outline: none;
+            background: #fbfdfc;
+            color: var(--text);
+            font-family: inherit;
+            font-size: 12px;
             font-weight: 500;
-            color: var(--text-dark) !important;
-            background-color: var(--bg-input) !important;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: border-color .2s, box-shadow .2s, background .2s;
         }
 
         .form-control-custom::placeholder {
-            color: #94a3b8;
+            color: #a5b1ab;
             font-weight: 400;
         }
 
         .form-control-custom:hover {
-            border-color: #cbd5e1 !important;
-            background-color: #f1f5f9 !important;
+            border-color: #cbdcd4;
         }
 
         .form-control-custom:focus {
-            outline: none !important;
-            background-color: #ffffff !important;
-            border-color: var(--primary-emerald) !important;
-            box-shadow: 0 0 0 4px rgba(4, 92, 66, 0.12) !important;
-        }
-
-        .form-control-custom:focus + .feather,
-        .input-group-custom:focus-within .feather {
-            color: var(--primary-emerald);
-            transform: scale(1.1);
+            background: #fff;
+            border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(8,127,104,.09);
         }
 
         .form-control-custom.is-invalid {
-            border-color: #ef4444 !important;
-            background-color: #fef2f2 !important;
+            border-color: #dc6262;
         }
 
-        .form-control-custom.is-invalid:focus {
-            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.12) !important;
-        }
-
-        /* Button Custom */
-        .btn-primary-custom {
-            background: linear-gradient(135deg, var(--primary-emerald) 0%, var(--dark-emerald) 100%) !important;
-            border: none !important;
-            padding: 0.95rem 1.5rem !important;
-            border-radius: 12px !important;
-            font-weight: 700 !important;
-            font-size: 0.95rem !important;
-            color: #ffffff !important;
-            letter-spacing: 0.4px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 100%;
-            box-shadow: 0 10px 20px -5px rgba(4, 92, 66, 0.4), 0 4px 6px -2px rgba(4, 92, 66, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.6rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary-custom::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-primary-custom:hover::after {
-            left: 100%;
-        }
-
-        .btn-primary-custom:hover {
-            background: linear-gradient(135deg, #056e4f 0%, var(--primary-emerald) 100%) !important;
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px -5px rgba(4, 92, 66, 0.5), 0 8px 10px -6px rgba(4, 92, 66, 0.2);
-            color: #ffffff !important;
-        }
-
-        .btn-primary-custom:active {
-            transform: translateY(0);
-            box-shadow: 0 5px 10px -3px rgba(4, 92, 66, 0.4);
-        }
-
-        /* Checkbox & Links */
-        .form-check-input {
-            width: 1.15em;
-            height: 1.15em;
-            margin-top: 0.12em;
-            border: 1.5px solid #cbd5e1 !important;
-            border-radius: 6px !important;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .form-check-input:checked {
-            background-color: var(--primary-emerald) !important;
-            border-color: var(--primary-emerald) !important;
-        }
-
-        .form-check-input:focus {
-            box-shadow: 0 0 0 3px rgba(4, 92, 66, 0.15) !important;
+        .field-wrapper:focus-within .field-icon {
+            color: var(--green);
         }
 
         .forgot-link {
-            color: var(--primary-emerald);
-            font-size: 0.8rem;
-            font-weight: 600;
+            color: var(--green);
+            font-size: 10px;
+            font-weight: 700;
             text-decoration: none;
-            transition: color 0.2s;
         }
 
         .forgot-link:hover {
-            color: var(--dark-emerald);
+            color: var(--green-dark);
             text-decoration: underline;
         }
 
-        /* Responsive Breakpoints */
-        @media (max-width: 1199.98px) {
-            .auth-form-wrapper {
-                padding: 3rem 2.5rem !important;
+        .remember-row {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin: 19px 0 25px;
+        }
+
+        .remember-row input {
+            width: 15px;
+            height: 15px;
+            accent-color: var(--green);
+            cursor: pointer;
+        }
+
+        .remember-row label {
+            color: var(--muted);
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .btn-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            height: 49px;
+            border: none;
+            border-radius: 10px;
+            background: var(--green);
+            color: #fff;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .2px;
+            cursor: pointer;
+            transition: background .2s, transform .2s, box-shadow .2s;
+        }
+
+        .btn-login:hover {
+            background: var(--green-dark);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(8,127,104,.16);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .login-security {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            margin-top: 25px;
+            color: #9aa8a1;
+            font-size: 10px;
+        }
+
+        .login-security i {
+            color: var(--green);
+        }
+
+        .alert-custom {
+            padding: 11px 13px;
+            margin-bottom: 22px;
+            border: 1px solid #d5ebe0;
+            border-radius: 9px;
+            background: #f0faf5;
+            color: #16734f;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .error-message {
+            margin-top: 7px;
+            color: #d14343;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .mobile-footer {
+            display: none;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 767px) {
+            .login-page {
+                padding: 20px 14px;
+                align-items: center;
             }
-            .custom-auth-banner {
-                padding: 3rem 2.5rem !important;
+
+            .login-card {
+                grid-template-columns: 1fr;
+                border-radius: 17px;
+            }
+
+            .brand-panel {
+                min-height: auto;
+                padding: 25px 25px 27px;
+            }
+
+            .brand-logo {
+                margin-bottom: 28px;
+            }
+
+            .brand-logo img {
+                width: 42px;
+                height: 42px;
+            }
+
+            .brand-label {
+                margin-bottom: 12px;
+            }
+
+            .brand-panel h1 {
+                font-size: 23px;
+                margin-bottom: 10px;
+            }
+
+            .brand-description {
+                font-size: 11px;
+                margin-bottom: 0;
+            }
+
+            .brand-footer {
+                display: none;
+            }
+
+            .form-panel {
+                padding: 35px 25px 30px;
+            }
+
+            .form-heading {
+                margin-bottom: 27px;
+            }
+
+            .form-heading h2 {
+                font-size: 24px;
+            }
+
+            .mobile-footer {
+                display: block;
+                margin-top: 22px;
+                color: #9aa8a1;
+                font-size: 10px;
+                text-align: center;
             }
         }
 
-        @media (max-width: 767.98px) {
-            .page-content {
-                padding: 1rem !important;
-                align-items: flex-start !important;
+        @media (max-width: 380px) {
+            .form-panel {
+                padding: 30px 20px;
             }
-            .auth-page .card {
-                border-radius: 20px !important;
+
+            .brand-panel {
+                padding: 22px 20px;
             }
-            .custom-auth-banner {
-                padding: 2.5rem 1.75rem !important;
-                text-align: center;
-                align-items: center;
-            }
-            .custom-auth-banner::before,
-            .custom-auth-banner::after {
-                display: none;
-            }
-            .custom-auth-banner h2 {
-                font-size: 1.75rem !important;
-            }
-            .auth-form-wrapper {
-                padding: 2.5rem 1.75rem !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="main-wrapper w-100">
-        <div class="page-wrapper full-page">
-            <div class="page-content d-flex align-items-center justify-content-center w-100">
 
-                <div class="row w-100 mx-0 auth-page justify-content-center">
-                    <div class="col-12 col-sm-11 col-md-11 col-lg-10 col-xl-8 px-0 px-sm-2">
-                        <div class="card">
-                            <div class="row g-0">
-                                <!-- Left Side Banner (Branding) -->
-                                <div class="col-md-5 pe-md-0 d-flex flex-column">
-                                    <div class="custom-auth-banner">
-                                        <div class="auth-side-content">
-                                            <div class="badge-portal">
-                                                <span>Portal Manajemen Resmi</span>
-                                            </div>
-                                            <h2>MA Miftahul Midad</h2>
-                                            <p class="mb-0">Selamat datang di Sistem Informasi Manajemen dan Portal Akademik. Silakan masuk untuk mengakses layanan portal web dan administrasi lembaga.</p>
-                                        </div>
-                                        <div class="mt-4 pt-4 border-top border-light border-opacity-10 d-none d-md-block" style="z-index: 2;">
-                                            <small class="text-white text-opacity-75 d-block font-weight-500" style="font-size: 0.78rem;">
-                                                &copy; {{ date('Y') }} MA Miftahul Midad.
-                                            </small>
-                                            <small class="text-white text-opacity-50" style="font-size: 0.7rem;">
-                                                All rights reserved. System Version 2.0
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
+<main class="login-page">
+    <div class="login-container">
 
-                                <!-- Right Side (Interactive Form) -->
-                                <div class="col-md-7 ps-md-0">
-                                    <div class="auth-form-wrapper">
-                                        <div class="mb-4 pb-1">
-                                            <a href="{{ route('home') }}" class="brand-title mb-1">
-                                                {{ $siteTitle }}<span>.</span>
-                                            </a>
-                                            <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.5;">Masukan kredensial akun Anda untuk melangkah ke panel kontrol.</p>
-                                        </div>
+        <div class="login-card">
 
-                                        <!-- Session Status / Alert -->
-                                        <x-auth-session-status class="mb-4 alert alert-success border-0 bg-success bg-opacity-10 text-success py-2 px-3 rounded-3" style="font-size: 0.85rem; font-weight: 600;" :status="session('status')" />
+            <!-- BRAND PANEL -->
+            <section class="brand-panel">
 
-                                        <form method="POST" action="{{ route('login') }}" novalidate>
-                                            @csrf
+                <div class="brand-content">
 
-                                            <!-- Email Address -->
-                                            <div class="mb-3 pb-1">
-                                                <label for="email" class="form-label">Alamat Email</label>
-                                                <div class="input-group-custom">
-                                                    <input type="email" class="form-control-custom @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="nama@mamiftahulmidad.sch.id">
-                                                    <i data-feather="mail" class="feather"></i>
-                                                </div>
-                                                @error('email')
-                                                    <div class="text-danger mt-2 d-flex align-items-center gap-1" style="font-size: 0.8rem; font-weight: 600;">
-                                                        <span>{{ $message }}</span>
-                                                    </div>
-                                                @enderror
-                                            </div>
+                    <div class="brand-logo">
+                        <img src="{{ asset('images/logo.png') }}"
+                             alt="Logo MA Miftahul Midad"
+                             onerror="this.style.display='none'">
 
-                                            <!-- Password -->
-                                            <div class="mb-3 pb-1">
-                                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                                    <label for="password" class="form-label mb-0">Kata Sandi</label>
-                                                    @if (Route::has('password.request'))
-                                                        <a href="{{ route('password.request') }}" class="forgot-link" tabindex="-1">Lupa Kata Sandi?</a>
-                                                    @endif
-                                                </div>
-                                                <div class="input-group-custom mt-1">
-                                                    <input type="password" class="form-control-custom @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="current-password" placeholder="••••••••••••">
-                                                    <i data-feather="lock" class="feather"></i>
-                                                </div>
-                                                @error('password')
-                                                    <div class="text-danger mt-2 d-flex align-items-center gap-1" style="font-size: 0.8rem; font-weight: 600;">
-                                                        <span>{{ $message }}</span>
-                                                    </div>
-                                                @enderror
-                                            </div>
-
-                                            <!-- Remember Me -->
-                                            <div class="form-check mb-4 pt-1 d-flex align-items-center">
-                                                <input type="checkbox" class="form-check-input m-0 me-2" id="remember_me" name="remember">
-                                                <label class="form-check-label text-muted user-select-none" for="remember_me" style="font-size: 0.85rem; cursor: pointer;">
-                                                    Tetap masuk di perangkat ini
-                                                </label>
-                                            </div>
-
-                                            <!-- Submit Button -->
-                                            <div class="mt-2">
-                                                <button type="submit" class="btn-primary-custom">
-                                                    <span>Otorisasi Masuk</span>
-                                                    <i data-feather="arrow-right" style="width: 18px; height: 18px;"></i>
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Mobile Footer Copyright -->
-                        <div class="text-center mt-4 d-block d-md-none">
-                            <p class="text-white text-opacity-50 mb-0" style="font-size: 0.8rem;">&copy; {{ date('Y') }} {{ $siteTitle }}. All rights reserved.</p>
+                        <div class="brand-logo-text">
+                            MA MIFTAHUL MIDAD
+                            <br>
+                            <span style="font-weight:400;opacity:.7;">
+                                Sistem Informasi Madrasah
+                            </span>
                         </div>
                     </div>
+
+                    <div class="brand-label">
+                        Portal Resmi Madrasah
+                    </div>
+
+                    <h1>
+                        Selamat Datang
+                        <br>
+                        Kembali.
+                    </h1>
+
+                    <p class="brand-description">
+                        Sistem Informasi Manajemen MA Miftahul Midad
+                        sebagai pusat pengelolaan informasi,
+                        administrasi, dan layanan digital madrasah.
+                    </p>
+
                 </div>
 
-            </div>
+                <div class="brand-footer">
+                    <div class="brand-divider"></div>
+                    &copy; {{ date('Y') }} {{ $siteTitle }}.
+                    <br>
+                    Seluruh hak cipta dilindungi.
+                </div>
+
+            </section>
+
+            <!-- LOGIN FORM -->
+            <section class="form-panel">
+
+                <div class="form-heading">
+                    <span class="eyebrow">Administrator Access</span>
+                    <h2>Masuk ke Akun</h2>
+                    <p>
+                        Silakan masukkan email dan kata sandi
+                        untuk mengakses panel administrasi.
+                    </p>
+                </div>
+
+                <!-- SESSION STATUS -->
+                @if (session('status'))
+                    <div class="alert-custom">
+                        {{ session('status') }}
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+
+                    <!-- EMAIL -->
+                    <div class="mb-4">
+                        <label for="email" class="form-label">
+                            Alamat Email
+                        </label>
+
+                        <div class="field-wrapper">
+                            <i data-feather="mail" class="field-icon"></i>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value="{{ old('email') }}"
+                                class="form-control-custom @error('email') is-invalid @enderror"
+                                placeholder="nama@email.com"
+                                required
+                                autofocus
+                                autocomplete="username"
+                            >
+                        </div>
+
+                        @error('email')
+                            <div class="error-message">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="mb-3">
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label for="password" class="form-label mb-0">
+                                Kata Sandi
+                            </label>
+
+                            @if (Route::has('password.request'))
+                                <a href="{{ route('password.request') }}"
+                                   class="forgot-link">
+                                    Lupa kata sandi?
+                                </a>
+                            @endif
+                        </div>
+
+                        <div class="field-wrapper">
+                            <i data-feather="lock" class="field-icon"></i>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control-custom @error('password') is-invalid @enderror"
+                                placeholder="Masukkan kata sandi"
+                                required
+                                autocomplete="current-password"
+                            >
+                        </div>
+
+                        @error('password')
+                            <div class="error-message">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- REMEMBER ME -->
+                    <div class="remember-row">
+                        <input
+                            type="checkbox"
+                            id="remember_me"
+                            name="remember"
+                        >
+
+                        <label for="remember_me">
+                            Ingat saya di perangkat ini
+                        </label>
+                    </div>
+
+                    <!-- SUBMIT -->
+                    <button type="submit" class="btn-login">
+                        <span>Masuk ke Dashboard</span>
+                        <i data-feather="arrow-right" style="width:16px;height:16px;"></i>
+                    </button>
+
+                </form>
+
+                <div class="login-security">
+                    <i data-feather="shield" style="width:13px;height:13px;"></i>
+                    Akses aman dan terbatas untuk pengguna terdaftar
+                </div>
+
+            </section>
+
         </div>
+
+        <div class="mobile-footer">
+            &copy; {{ date('Y') }} {{ $siteTitle }}.
+            Seluruh hak cipta dilindungi.
+        </div>
+
     </div>
+</main>
 
-    <!-- core:js -->
-    <script src="{{ asset('template/assets/vendors/core/core.js') }}"></script>
+<!-- Scripts -->
+<script src="{{ asset('template/assets/vendors/core/core.js') }}"></script>
+<script src="{{ asset('template/assets/vendors/feather-icons/feather.min.js') }}"></script>
 
-    <!-- inject:js -->
-    <script src="{{ asset('template/assets/vendors/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('template/assets/js/template.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
+    });
+</script>
 
-    <!-- Initialize Feather Icons -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            if (typeof feather !== 'undefined') {
-                feather.replace();
-            }
-        });
-    </script>
 </body>
 </html>

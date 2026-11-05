@@ -20,7 +20,7 @@
 				</div>
 				<div class="row align-items-start">
 					<div class="col-md-7">
-						<p class="text-muted tx-13 mb-3 mb-md-0">Buat pengumuman baru untuk SMPIT Al-Itqon. Isi semua field yang diperlukan.</p>
+						<p class="text-muted tx-13 mb-3 mb-md-0">Buat pengumuman baru untuk MAS Miftahul Midad. Isi semua field yang diperlukan.</p>
 					</div>
 					<div class="col-md-5 d-flex justify-content-md-end">
 						<a href="{{ route('admin.announcements.index') }}" class="btn btn-secondary mb-3 mb-md-0">
@@ -40,7 +40,7 @@
 			<div class="card-body">
 				<form action="{{ route('admin.announcements.store') }}" method="POST" enctype="multipart/form-data">
 					@csrf
-					
+
 					<div class="row">
 						<div class="col-md-8">
 							<div class="mb-3">
@@ -228,7 +228,7 @@
 		}
 		$('input[name="attachment_type"]').on('change', updateAttachmentVisibility);
 		updateAttachmentVisibility();
-		
+
 		// Auto-resize textarea
 		$('textarea').on('input', function() {
 			this.style.height = 'auto';
@@ -238,15 +238,15 @@
 		// Handle add category form submission
 		$('#addCategoryForm').on('submit', function(e) {
 			e.preventDefault();
-			
+
 			const formData = new FormData(this);
 			const submitBtn = $(this).find('button[type="submit"]');
 			const originalText = submitBtn.html();
-			
+
 			// Show loading state
 			submitBtn.html('<span class="spinner-border spinner-border-sm me-2"></span>Menyimpan...');
 			submitBtn.prop('disabled', true);
-			
+
 			$.ajax({
 				url: '{{ route("admin.announcements.category.store") }}',
 				type: 'POST',
@@ -261,10 +261,10 @@
 						// Add new option to select
 						const newOption = new Option(response.category.name, response.category.id, true, true);
 						$('#category_id').append(newOption).trigger('change');
-						
+
 						// Show success message
 						toastr.success(response.message);
-						
+
 						// Close modal and reset form
 						$('#addCategoryModal').modal('hide');
 						$('#addCategoryForm')[0].reset();
@@ -273,7 +273,7 @@
 				},
 				error: function(xhr) {
 					let errorMessage = 'Terjadi kesalahan saat menyimpan kategori';
-					
+
 					if (xhr.responseJSON && xhr.responseJSON.errors) {
 						const errors = xhr.responseJSON.errors;
 						if (errors.name) {
@@ -282,7 +282,7 @@
 					} else if (xhr.responseJSON && xhr.responseJSON.message) {
 						errorMessage = xhr.responseJSON.message;
 					}
-					
+
 					toastr.error(errorMessage);
 				},
 				complete: function() {

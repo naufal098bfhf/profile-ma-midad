@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-lg-8 mb-4">
                 <div class="ppdb-info-card">
@@ -65,12 +65,12 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-4 mb-4">
                 <div class="ppdb-cta-card">
                     <h5 class="ppdb-cta-title">Daftar Sekarang!</h5>
-                    <p class="ppdb-cta-text">Jangan lewatkan kesempatan untuk bergabung dengan SMPIT Al-Itqon</p>
-                    
+                    <p class="ppdb-cta-text">Jangan lewatkan kesempatan untuk bergabung dengan MAS Miftahul Midad</p>
+
                     <div class="ppdb-cta-buttons">
                         <a href="{{ route('ppdb.index') }}" class="btn btn-primary btn-sm mb-2 w-100">
                             <i class="fas fa-user-plus me-2"></i>Daftar Online
@@ -82,7 +82,7 @@
                             <i class="fas fa-phone me-2"></i>Hubungi Kami
                         </a>
                     </div>
-                    
+
                     <div class="ppdb-security-info mt-3">
                         <small class="text-muted">
                             <i class="fas fa-shield-alt text-success me-1"></i>
@@ -92,7 +92,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Quick FAQ Preview -->
         @if($ppdb->faqs && count($ppdb->faqs) > 0)
         <div class="row">
@@ -273,18 +273,18 @@
     .ppdb-widget {
         padding: 2rem 0;
     }
-    
+
     .ppdb-info-card,
     .ppdb-cta-card,
     .ppdb-faq-preview {
         padding: 1.5rem;
     }
-    
+
     .ppdb-meta {
         flex-direction: column;
         gap: 0.5rem;
     }
-    
+
     .ppdb-visual {
         margin-top: 1rem;
     }

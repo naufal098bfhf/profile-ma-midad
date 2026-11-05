@@ -17,16 +17,16 @@ class GalleryCategory extends Model
         'icon',
         'color',
         'is_active',
-        'sort_order'
+        'sort_order',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
-        'sort_order' => 'integer'
+        'sort_order' => 'integer',
     ];
 
     /**
-     * Generate slug from name
+     * Generate slug from name.
      */
     public function setNameAttribute($value)
     {
@@ -43,7 +43,7 @@ class GalleryCategory extends Model
     }
 
     /**
-     * Get the galleries for the category
+     * Get the galleries for the category.
      */
     public function galleries()
     {
@@ -51,7 +51,7 @@ class GalleryCategory extends Model
     }
 
     /**
-     * Scope for active categories
+     * Scope for active categories.
      */
     public function scopeActive($query)
     {
@@ -59,7 +59,7 @@ class GalleryCategory extends Model
     }
 
     /**
-     * Scope for ordered categories
+     * Scope for ordered categories.
      */
     public function scopeOrdered($query)
     {

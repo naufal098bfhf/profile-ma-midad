@@ -21,7 +21,7 @@
 				</div>
 				<div class="row align-items-start">
 					<div class="col-md-7">
-						<p class="text-muted tx-13 mb-3 mb-md-0">Detail lengkap penulis SMPIT Al-Itqon.</p>
+						<p class="text-muted tx-13 mb-3 mb-md-0">Detail lengkap penulis MAS Miftahul Midad.</p>
 					</div>
 				</div>
 			</div>
@@ -119,7 +119,7 @@
 										<small class="text-muted">{{ $author->email }}</small>
 									</div>
 								</div>
-								
+
 								<div class="mb-3">
 									<label class="form-label fw-bold">Nama:</label>
 									<p class="mb-0">{{ $author->name }}</p>

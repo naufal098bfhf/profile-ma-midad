@@ -1,129 +1,149 @@
 <!-- Custom Style untuk Teacher Widget (Sesuai Referensi UI) -->
 <style>
-    /* Section Background & Container */
+    /* =====================================================
+       MA MIFTAHUL MIDAD — WIDGET GURU
+       Tema Turquoise: #10A596
+       CSS only; struktur Blade dan data tetap dipertahankan
+       ===================================================== */
+
     .teacher-widget-premium {
-        background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 50%, #f1f5f9 100%);
+        --teacher-primary: #10A596;
+        --teacher-hover: #0D8176;
+        --teacher-dark: #087F74;
+        --teacher-light: #E7F7F4;
+        --teacher-bg: #F7FBFA;
+        --teacher-text: #243746;
+        --teacher-muted: #64748B;
+        --teacher-border: #DCEBE8;
+
+        background: linear-gradient(135deg, #F7FBFA 0%, #EDF8F6 52%, #F7FBFA 100%);
         padding: 5rem 0;
         position: relative;
         overflow: hidden;
+        color: var(--teacher-text);
     }
 
-    /* Header Styling */
     .teacher-widget-premium .widget-tag {
-        color: #1e40af;
-        font-size: 0.85rem;
-        font-weight: 700;
-        letter-spacing: 0.15em;
+        color: var(--teacher-dark);
+        font-size: .8rem;
+        font-weight: 800;
+        letter-spacing: .13em;
         text-transform: uppercase;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        margin-bottom: 0.75rem;
+        gap: .5rem;
+        margin-bottom: .75rem;
+    }
+
+    .teacher-widget-premium .widget-tag i {
+        color: var(--teacher-primary);
     }
 
     .teacher-widget-premium .widget-main-title {
-        color: #0f172a;
-        font-size: 2.35rem;
-        font-weight: 700;
-        font-family: 'Georgia', 'Times New Roman', serif;
+        color: var(--teacher-text);
+        font-size: clamp(1.8rem, 3.5vw, 2.45rem);
+        font-weight: 800;
+        font-family: "Inter", "Segoe UI", Arial, sans-serif;
         line-height: 1.25;
-        margin-bottom: 0.5rem;
+        letter-spacing: -.7px;
+        margin-bottom: .5rem;
     }
 
-    /* Ornamen Garis Emas di Bawah Judul */
     .teacher-widget-premium .title-ornament {
         display: flex;
         align-items: center;
         gap: 8px;
-        margin: 1.25rem 0;
+        margin: 1.15rem 0;
     }
+
+    .teacher-widget-premium .title-ornament .line-long,
+    .teacher-widget-premium .title-ornament .line-short {
+        height: 3px;
+        background: var(--teacher-primary);
+        border-radius: 3px;
+    }
+
     .teacher-widget-premium .title-ornament .line-long {
-        height: 2px;
-        width: 120px;
-        background: #d97706;
-        border-radius: 2px;
+        width: 90px;
     }
+
     .teacher-widget-premium .title-ornament .diamond {
-        color: #d97706;
-        font-size: 0.75rem;
+        color: var(--teacher-primary);
+        font-size: .7rem;
         line-height: 1;
     }
+
     .teacher-widget-premium .title-ornament .line-short {
-        height: 2px;
-        width: 40px;
-        background: #d97706;
-        border-radius: 2px;
+        width: 34px;
     }
 
     .teacher-widget-premium .widget-desc {
-        color: #475569;
-        font-size: 0.95rem;
-        line-height: 1.6;
-        max-width: 500px;
+        color: var(--teacher-muted);
+        font-size: .95rem;
+        line-height: 1.85;
+        max-width: 520px;
     }
 
-    /* Tombol Lihat Semua (Dark Navy Pill) */
     .teacher-widget-premium .btn-view-all {
-        background: #0f172a;
-        color: #ffffff !important;
-        font-weight: 600;
-        font-size: 0.9rem;
-        padding: 0.75rem 1.75rem;
+        background: var(--teacher-primary);
+        color: #FFFFFF !important;
+        font-weight: 700;
+        font-size: .9rem;
+        padding: .8rem 1.6rem;
         border-radius: 50rem;
-        box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.4);
-        transition: all 0.3s ease;
+        border: 1px solid var(--teacher-primary);
+        box-shadow: 0 8px 20px rgba(16, 165, 150, .2);
+        transition: background .25s ease, box-shadow .25s ease, transform .25s ease;
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
+        justify-content: center;
+        gap: .5rem;
         text-decoration: none;
-        border: none;
     }
 
     .teacher-widget-premium .btn-view-all:hover {
-        background: #1e3a8a;
-        box-shadow: 0 15px 25px -5px rgba(30, 58, 138, 0.5);
+        background: var(--teacher-hover);
+        border-color: var(--teacher-hover);
+        color: #FFFFFF !important;
+        box-shadow: 0 12px 26px rgba(16, 165, 150, .25);
         transform: translateY(-2px);
     }
 
-    /* Desain Kartu Guru */
     .teacher-widget-premium .teacher-card {
-        background: #ffffff;
-        border-radius: 24px !important;
-        border: 1px solid rgba(226, 232, 240, 0.9) !important;
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        background: #FFFFFF;
+        border-radius: 20px !important;
+        border: 1px solid var(--teacher-border) !important;
+        box-shadow: 0 8px 25px rgba(36, 55, 70, .055);
+        transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
         overflow: hidden;
     }
 
     .teacher-widget-premium .teacher-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 20px 35px -5px rgba(15, 23, 42, 0.1), 0 10px 15px -5px rgba(15, 23, 42, 0.04);
-        border-color: #93c5fd !important;
+        transform: translateY(-5px);
+        box-shadow: 0 16px 34px rgba(16, 165, 150, .13);
+        border-color: rgba(16, 165, 150, .45) !important;
     }
 
-    /* Foto & Overlay Gradasi Biru */
-   /* Perbaikan: Ganti background agar putih bersih, bukan biru */
-.teacher-widget-premium .img-container {
-    position: relative;
-    height: 280px;
-    overflow: hidden;
-    border-radius: 24px 24px 0 0;
-    background: #ffffff; /* Ubah dari #e2e8f0 ke putih */
-    border-bottom: 1px solid #f1f5f9; /* Tambahkan border agar rapi */
-}
+    .teacher-widget-premium .img-container {
+        position: relative;
+        height: 280px;
+        overflow: hidden;
+        border-radius: 19px 19px 0 0;
+        background: #F1F8F6;
+        border-bottom: 1px solid var(--teacher-border);
+    }
 
-/* Memastikan gambar tetap tertata */
-.teacher-widget-premium .img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    transition: transform 0.6s ease;
-    display: block;
-}
+    .teacher-widget-premium .img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        transition: transform .5s ease;
+        display: block;
+    }
 
     .teacher-widget-premium .teacher-card:hover .img-container img {
-        transform: scale(1.06);
+        transform: scale(1.04);
     }
 
     .teacher-widget-premium .img-overlay {
@@ -132,65 +152,70 @@
         left: 0;
         right: 0;
         height: 65%;
-        background: linear-gradient(to top, rgba(10, 25, 47, 0.95) 0%, rgba(10, 25, 47, 0.4) 50%, transparent 100%);
+        background: linear-gradient(
+            to top,
+            rgba(8, 55, 51, .90) 0%,
+            rgba(8, 55, 51, .42) 48%,
+            transparent 100%
+        );
         display: flex;
         align-items: flex-end;
         justify-content: center;
         padding-bottom: 1rem;
     }
 
-    /* Badge & Icon di Dalam Foto */
     .teacher-widget-premium .btn-icon-top {
         position: absolute;
-        top: 15px;
-        right: 15px;
-        width: 36px;
-        height: 36px;
+        top: 14px;
+        right: 14px;
+        width: 38px;
+        height: 38px;
+        border: 1px solid rgba(255, 255, 255, .5);
         border-radius: 50%;
-        background: #1d4ed8;
-        color: #ffffff;
+        background: var(--teacher-primary);
+        color: #FFFFFF;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 0.85rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        font-size: .85rem;
+        box-shadow: 0 5px 15px rgba(8, 55, 51, .2);
         z-index: 2;
     }
 
     .teacher-widget-premium .subject-pill {
-        background: rgba(29, 78, 216, 0.85);
-        backdrop-filter: blur(4px);
-        color: #ffffff;
-        font-size: 0.75rem;
-        font-weight: 600;
-        padding: 0.35rem 1rem;
+        background: rgba(8, 127, 116, .92);
+        backdrop-filter: blur(5px);
+        color: #FFFFFF;
+        font-size: .75rem;
+        font-weight: 700;
+        padding: .4rem .9rem;
         border-radius: 50rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, .3);
         display: inline-flex;
         align-items: center;
         gap: 6px;
         z-index: 2;
     }
 
-    /* Detail Teks Kartu */
     .teacher-widget-premium .teacher-name {
-        color: #0f172a;
+        color: var(--teacher-text);
         font-size: 1.05rem;
-        font-weight: 700;
-        font-family: 'Georgia', 'Times New Roman', serif;
-        margin-bottom: 0.25rem;
+        font-weight: 800;
+        font-family: "Inter", "Segoe UI", Arial, sans-serif;
+        line-height: 1.5;
+        margin-bottom: .4rem;
     }
 
     .teacher-widget-premium .teacher-position {
-        color: #2563eb;
-        font-size: 0.85rem;
-        font-weight: 600;
-        margin-bottom: 0.75rem;
+        color: var(--teacher-dark);
+        font-size: .84rem;
+        font-weight: 700;
+        margin-bottom: .75rem;
     }
 
     .teacher-widget-premium .teacher-subject-detail {
-        color: #64748b;
-        font-size: 0.8rem;
+        color: var(--teacher-muted);
+        font-size: .8rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -198,82 +223,164 @@
         margin-bottom: 1.25rem;
     }
 
-    /* Tombol Lihat Profil (Outline Pill) */
+    .teacher-widget-premium .teacher-subject-detail i {
+        color: var(--teacher-primary) !important;
+    }
+
+    .teacher-widget-premium .teacher-card .card-footer {
+        background: #FFFFFF !important;
+        border-top: 1px solid #EEF5F3 !important;
+    }
+
     .teacher-widget-premium .btn-profile-outline {
-        border: 1.5px solid #93c5fd;
-        color: #1e40af;
-        background: transparent;
+        border: 1.5px solid var(--teacher-primary);
+        color: var(--teacher-dark);
+        background: #FFFFFF;
         border-radius: 50rem;
-        padding: 0.5rem 1.25rem;
-        font-size: 0.85rem;
-        font-weight: 600;
+        padding: .58rem 1rem;
+        font-size: .84rem;
+        font-weight: 700;
         width: 85%;
         margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        transition: all 0.3s ease;
+        transition: background .25s ease, color .25s ease, box-shadow .25s ease;
         text-decoration: none;
     }
 
     .teacher-widget-premium .teacher-card:hover .btn-profile-outline,
     .teacher-widget-premium .btn-profile-outline:hover {
-        background: #1e40af;
-        color: #ffffff !important;
-        border-color: #1e40af;
-        box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+        background: var(--teacher-primary);
+        color: #FFFFFF !important;
+        border-color: var(--teacher-primary);
+        box-shadow: 0 5px 15px rgba(16, 165, 150, .18);
     }
 
-    /* Banner Statistik Bawah (Persis Referensi) */
     .teacher-widget-premium .stats-banner {
-        background: #ffffff;
-        border-radius: 24px;
-        padding: 0.5rem 1.5rem;
-        margin-top: 1rem;
-        border: 1px solid rgba(226, 232, 240, 0.9);
-        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.03);
+        background: #FFFFFF;
+        border-radius: 22px;
+        padding: 1.5rem;
+        margin-top: 1.5rem;
+        border: 1px solid var(--teacher-border);
+        box-shadow: 0 8px 26px rgba(36, 55, 70, .045);
     }
 
     .teacher-widget-premium .stat-item {
         display: flex;
         align-items: center;
         gap: 1rem;
+        height: 100%;
     }
 
     .teacher-widget-premium .stat-icon {
-        width: 54px;
-        height: 54px;
-        background: #eff6ff;
-        color: #1d4ed8;
-        border-radius: 16px;
+        width: 52px;
+        height: 52px;
+        background: var(--teacher-light);
+        color: var(--teacher-primary);
+        border: 1px solid #D5F0EB;
+        border-radius: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5rem;
+        font-size: 1.35rem;
         flex-shrink: 0;
     }
 
     .teacher-widget-premium .stat-title {
-        color: #0f172a;
+        color: var(--teacher-dark);
         font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 2px;
+        font-weight: 800;
+        margin-bottom: 3px;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
     }
 
     .teacher-widget-premium .stat-desc {
-        color: #64748b;
-        font-size: 0.75rem;
-        line-height: 1.4;
+        color: var(--teacher-muted);
+        font-size: .77rem;
+        line-height: 1.6;
         margin: 0;
     }
 
-    /* Empty State */
+    .teacher-widget-premium .stat-desc.fw-semibold,
+    .teacher-widget-premium .text-dark {
+        color: var(--teacher-text) !important;
+    }
+
     .teacher-widget-premium .empty-state {
-        background: #ffffff;
-        border-radius: 24px;
-        border: 2px dashed #cbd5e1;
-        padding: 4rem 1rem;
+        background: #FFFFFF;
+        border-radius: 22px;
+        border: 2px dashed #B9DDD6;
+        padding: 4rem 1.25rem;
+    }
+
+    .teacher-widget-premium .empty-state > i {
+        color: var(--teacher-primary) !important;
+    }
+
+    .teacher-widget-premium .empty-state h6 {
+        color: var(--teacher-text);
+        font-weight: 800;
+    }
+
+    .teacher-widget-premium .empty-state p {
+        color: var(--teacher-muted);
+    }
+
+    .teacher-widget-premium a:focus-visible {
+        outline: 3px solid rgba(16, 165, 150, .5);
+        outline-offset: 4px;
+    }
+
+    @media (max-width: 991.98px) {
+        .teacher-widget-premium {
+            padding: 4rem 0;
+        }
+
+        .teacher-widget-premium .img-container {
+            height: 260px;
+        }
+
+        .teacher-widget-premium .stats-banner {
+            padding: 1.25rem;
+        }
+    }
+
+    @media (max-width: 575.98px) {
+        .teacher-widget-premium {
+            padding: 3.25rem 0;
+        }
+
+        .teacher-widget-premium .widget-main-title {
+            font-size: 1.85rem;
+        }
+
+        .teacher-widget-premium .img-container {
+            height: 300px;
+        }
+
+        .teacher-widget-premium .stats-banner {
+            padding: 1.1rem;
+            border-radius: 17px;
+        }
+
+        .teacher-widget-premium .stat-icon {
+            width: 46px;
+            height: 46px;
+            flex-basis: 46px;
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .teacher-widget-premium *,
+        .teacher-widget-premium *::before,
+        .teacher-widget-premium *::after {
+            animation-duration: .01ms !important;
+            transition-duration: .01ms !important;
+        }
     }
 </style>
 

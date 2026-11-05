@@ -3,103 +3,80 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gallery;
-use App\Models\GalleryCategory;
-use Illuminate\Http\Request;
 
 class GalleryController extends Controller
 {
     /**
-     * Display a listing of galleries.
+     * Halaman daftar album publik.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $query = Gallery::with('category')->published()->ordered();
+        $galleries = Gallery::with('category')
+            ->withCount('photos')
+            ->published()
+            ->ordered()
+            ->paginate(12);
 
-        // Filter by category
-        if ($request->has('category') && $request->category) {
-            $query->byCategory($request->category);
-        }
-
-        $galleries = $query->paginate(12);
-
-        // Get active categories for filter
-        $categories = GalleryCategory::active()->ordered()->get();
-
-        return view('galleries.index', compact('galleries', 'categories'));
+        return view('galleries.index', compact('galleries'));
     }
 
     /**
-     * Display the specified gallery.
+     * Halaman detail album publik.
      */
     public function show(Gallery $gallery)
     {
-        // Load category relationship
-        $gallery->load('category');
-        
-        // Increment view count
+        // Pastikan album sudah dipublikasikan.
+        abort_unless($gallery->is_published, 404);
+
+        // Tambahkan jumlah kunjungan album.
         $gallery->incrementViews();
 
-        // Previous and next within the same category, following the same ordering logic
+        // Ambil kategori dan seluruh foto dalam album.
+        $gallery->load([
+            'category',
+            'photos',
+        ]);
+
+        // Album sebelumnya.
         $previousGallery = Gallery::published()
-            ->where('category_id', $gallery->category_id)
-            ->where(function ($q) use ($gallery) {
-                $q->where('sort_order', '<', $gallery->sort_order)
-                  ->orWhere(function ($q2) use ($gallery) {
-                      $q2->where('sort_order', $gallery->sort_order)
-                         ->where('created_at', '>', $gallery->created_at);
-                  });
-            })
-            ->orderBy('sort_order', 'desc')
-            ->orderBy('created_at', 'asc')
+            ->where('id', '<', $gallery->id)
+            ->orderBy('id', 'desc')
             ->first();
 
+        // Album berikutnya.
         $nextGallery = Gallery::published()
-            ->where('category_id', $gallery->category_id)
-            ->where(function ($q) use ($gallery) {
-                $q->where('sort_order', '>', $gallery->sort_order)
-                  ->orWhere(function ($q2) use ($gallery) {
-                      $q2->where('sort_order', $gallery->sort_order)
-                         ->where('created_at', '<', $gallery->created_at);
-                  });
-            })
-            ->orderBy('sort_order', 'asc')
-            ->orderBy('created_at', 'desc')
+            ->where('id', '>', $gallery->id)
+            ->orderBy('id', 'asc')
             ->first();
 
-        // Get related galleries from same category
-        $relatedGalleries = Gallery::with('category')
-            ->published()
-            ->where('id', '!=', $gallery->id)
-            ->where('category_id', $gallery->category_id)
+        // Album terkait berdasarkan kategori.
+        $relatedQuery = Gallery::published()
+            ->with('category')
+            ->withCount('photos')
+            ->where('id', '!=', $gallery->id);
+
+        // Jika album memiliki kategori, tampilkan album
+        // lain dengan kategori yang sama.
+        if ($gallery->category_id !== null) {
+            $relatedQuery->where(
+                'category_id',
+                $gallery->category_id
+            );
+        } else {
+            $relatedQuery->whereNull('category_id');
+        }
+
+        $relatedGalleries = $relatedQuery
             ->ordered()
-            ->take(6)
+            ->limit(4)
             ->get();
 
-        return view('galleries.show', compact('gallery', 'relatedGalleries', 'previousGallery', 'nextGallery'));
-    }
-
-    /**
-     * Get featured galleries for homepage widget
-     */
-    public function getFeatured()
-    {
-        return Gallery::with('category')
-            ->published()
-            ->featured()
-            ->ordered()
-            ->take(8)
-            ->get();
-    }
-
-    /**
-     * Get latest galleries for homepage widget
-     */
-    public function getLatest()
-    {
-        return Gallery::with('category')
-            ->published()
-            ->ordered()
-            ->take(8)
-            ->get();
+        // Kirim seluruh variabel ke halaman detail.
+        return view('galleries.show', compact(
+            'gallery',
+            'previousGallery',
+            'nextGallery',
+            'relatedGalleries'
+        ));
     }
 }

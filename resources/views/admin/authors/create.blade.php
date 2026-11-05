@@ -20,7 +20,7 @@
 				</div>
 				<div class="row align-items-start">
 					<div class="col-md-7">
-						<p class="text-muted tx-13 mb-3 mb-md-0">Tambahkan penulis baru untuk SMPIT Al-Itqon. Pastikan mengisi semua field yang diperlukan.</p>
+						<p class="text-muted tx-13 mb-3 mb-md-0">Tambahkan penulis baru untuk MAS Miftahul Midad. Pastikan mengisi semua field yang diperlukan.</p>
 					</div>
 				</div>
 			</div>
@@ -34,7 +34,7 @@
 			<div class="card-body">
 				<form class="forms-sample" method="POST" action="{{ route('admin.authors.store') }}">
 					@csrf
-					
+
 					<div class="row">
 						<div class="col-md-8">
 							<div class="mb-3">
@@ -126,7 +126,7 @@
 <script>
 	$(function() {
 		'use strict';
-		
+
 		// Auto generate slug from name
 		$('#name').on('input', function() {
 			var name = $(this).val();

@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', $article['title'] . ' - SMPIT Al-Itqon')
+@section('title', $article['title'] . ' - MAS Miftahul Midad')
 @section('description', $article['excerpt'])
 
 @push('styles')
     @vite('resources/css/article-detail.css')
-    
+
     <!-- Open Graph Meta Tags for Article -->
     <meta property="og:type" content="article">
-    <meta property="og:title" content="{{ $article['title'] }} - SMPIT Al-Itqon">
+    <meta property="og:title" content="{{ $article['title'] }} - MAS Miftahul Midad">
     <meta property="og:description" content="{{ $article['excerpt'] }}">
     <meta property="og:url" content="{{ request()->url() }}">
     @if(!empty($article['image']))
@@ -25,10 +25,10 @@
     @foreach($article['categories'] as $category)
         <meta property="article:section" content="{{ $category->name }}">
     @endforeach
-    
+
     <!-- Twitter Card Meta Tags for Article -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $article['title'] }} - SMPIT Al-Itqon">
+    <meta name="twitter:title" content="{{ $article['title'] }} - MAS Miftahul Midad">
     <meta name="twitter:description" content="{{ $article['excerpt'] }}">
     @if(!empty($article['image']))
     @section('twitter_image')
@@ -47,10 +47,10 @@
             <div class="article-image">
                 <img src="{{ $article['image'] }}" alt="{{ $article['title'] }}" class="img-fluid rounded">
             </div>
-            
+
             <!-- Excerpt Section Card (akan tertindih oleh article-content-card) -->
             <article class="article-excerpt-card article-content-card" itemscope itemtype="https://schema.org/Article">
-                
+
                 <!-- Categories -->
                 <div class="entry-taxonomies">
                     <span class="category-links term-links category-style-normal">
@@ -60,17 +60,17 @@
                         @endforeach
                     </span>
                 </div>
-                
+
                 <!-- Article Title -->
                 <h1 class="entry-title" itemprop="headline">{{ $article['title'] }}</h1>
-                
+
                 <!-- Excerpt Text -->
                 <div class="excerpt-text">
                     <p><strong>{{ config('app.name') }} –</strong> {{ $article['excerpt'] }}</p>
                 </div>
-                
-                
-                
+
+
+
                 <div class="entry-content single-content" itemprop="articleBody">
                     {!! $article['description'] !!}
                 </div>
@@ -91,10 +91,10 @@
                 <div class="post-views content-post post-{{ $article['id'] }} entry-meta load-static">
                     <span class="post-views-icon">
                         <i class="bi bi-eye-fill"></i>
-                    </span> 
+                    </span>
                     <span class="post-views-count">{{ $article['views'] ?? 0 }}</span>
                 </div>
-                
+
                 <!-- Share Buttons -->
                 <div class="share-buttons">
                     <button type="button" class="btn btn-outline-primary btn-sm me-2" id="copyBtn" onclick="copyLink()">
@@ -107,7 +107,7 @@
                         <i class="bi bi-whatsapp"></i> Share WhatsApp (Group)
                     </a>
                 </div>
-                
+
                 <!-- Microdata helpers -->
                 <meta itemprop="mainEntityOfPage" content="{{ request()->url() }}">
                 <meta itemprop="image" content="{{ $article['image'] }}">
@@ -126,7 +126,7 @@
                         $previousArticle = \App\Models\Article::published()->where('id', '<', $article['id'])->latest('id')->first();
                         $nextArticle = \App\Models\Article::published()->where('id', '>', $article['id'])->oldest('id')->first();
                     @endphp
-                    
+
                     @if($previousArticle)
                     <div class="nav-previous">
                         <a href="{{ route('article.detail', $previousArticle->slug) }}" rel="prev">
@@ -137,7 +137,7 @@
                         </a>
                     </div>
                     @endif
-                    
+
                     @if($nextArticle)
                     <div class="nav-next">
                         <a href="{{ route('article.detail', $nextArticle->slug) }}" rel="next">
@@ -156,13 +156,13 @@
         <div class="col-lg-4">
             <div class="sidebar">
                 <h3 class="sidebar-title">Pos Terbaru</h3>
-                
+
                 @foreach($recentPosts as $recentPost)
                 <article class="recent-post">
                     <a class="post-thumbnail" href="{{ route('article.detail', Str::slug($recentPost['title'])) }}">
                         <img width="300" height="200" src="{{ $recentPost['image'] }}" class="attachment-medium_large size-medium_large wp-post-image" alt="{{ $recentPost['title'] }}" decoding="async">
                     </a>
-                    
+
                     <div class="post-content">
                         <div class="entry-taxonomies">
                             <span class="category-links term-links category-style-normal">
@@ -172,11 +172,11 @@
                                 @endforeach
                             </span>
                         </div>
-                        
+
                         <h4 class="post-title">
                             <a href="{{ route('article.detail', Str::slug($recentPost['title'])) }}" rel="bookmark">{{ $recentPost['title'] }}</a>
                         </h4>
-                        
+
                         <div class="entry-meta entry-meta-divider-dot">
                             <span class="posted-by">
                                 <span class="meta-label">By</span>
@@ -200,7 +200,7 @@
 <script>
 function copyLink() {
     const shareText = `[{{ $article['title'] }}/{{ $article['categories']->pluck('name')->implode(', ') }}] Archives - {{ config('app.name') }} {{ $article['shortlink'] }}`;
-    
+
     // Check if clipboard API is available
     if (navigator.clipboard && window.isSecureContext) {
         // Modern browsers with secure context
@@ -226,7 +226,7 @@ function fallbackCopyText(text) {
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
-    
+
     try {
         const successful = document.execCommand('copy');
         if (successful) {
@@ -238,7 +238,7 @@ function fallbackCopyText(text) {
         console.error('Fallback copy failed: ', err);
         alert('Gagal menyalin link. Silakan salin manual: ' + text);
     }
-    
+
     document.body.removeChild(textArea);
 }
 
@@ -247,20 +247,20 @@ function showCopySuccess() {
     const button = document.getElementById('copyBtn');
     const btnText = button.querySelector('.btn-text');
     const btnIcon = button.querySelector('i');
-    
+
     // Store original content
     const originalText = btnText.textContent;
     const originalIcon = btnIcon.className;
-    
+
     // Change to success state
     btnText.textContent = 'Sudah Tercopy!';
     btnIcon.className = 'bi bi-check-circle-fill';
     button.classList.remove('btn-outline-primary');
     button.classList.add('btn-success');
-    
+
     // Add pulse animation
     button.style.animation = 'pulse 0.6s ease-in-out';
-    
+
     // Reset after 2 seconds
     setTimeout(() => {
         btnText.textContent = originalText;
@@ -275,7 +275,7 @@ function shareWhatsApp(type) {
     const shareText = `[{{ $article['title'] }}/{{ $article['categories']->pluck('name')->implode(', ') }}] Archives - {{ config('app.name') }} {{ $article['shortlink'] }}`;
     const encodedText = encodeURIComponent(shareText);
     const whatsappUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
-    
+
     window.open(whatsappUrl, '_blank');
 }
 </script>

@@ -21,7 +21,7 @@
 				</div>
 				<div class="row align-items-start">
 					<div class="col-md-7">
-						<p class="text-muted tx-13 mb-3 mb-md-0">Detail lengkap kategori SMPIT Al-Itqon.</p>
+						<p class="text-muted tx-13 mb-3 mb-md-0">Detail lengkap kategori MAS Miftahul Midad.</p>
 					</div>
 				</div>
 			</div>
@@ -95,7 +95,7 @@
 						<div class="card">
 							<div class="card-body">
 								<h6 class="card-title">Informasi Kategori</h6>
-								
+
 								<div class="mb-3">
 									<label class="form-label fw-bold">Nama:</label>
 									<p class="mb-0">{{ $category->name }}</p>

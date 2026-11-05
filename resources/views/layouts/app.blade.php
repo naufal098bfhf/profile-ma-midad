@@ -49,7 +49,7 @@
         <meta property="og:type" content="website">
         <meta property="og:site_name" content="{{ $siteTitle }}">
         <meta property="og:title" content="@yield('title', $siteTitle)">
-        <meta property="og:description" content="@yield('description', $metaDescription ?: 'Berita dan Artikel Islami dari SMPIT Al-Itqon')">
+        <meta property="og:description" content="@yield('description', $metaDescription ?: 'Berita dan Artikel Islami dari MAS Miftahul Midad')">
         <meta property="og:url" content="{{ url()->current() }}">
         @stack('og_image')
         @if(View::hasSection('og_image'))
@@ -65,7 +65,7 @@
         <!-- Twitter Card Meta Tags -->
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="@yield('title', $siteTitle)">
-        <meta name="twitter:description" content="@yield('description', $metaDescription ?: 'Berita dan Artikel Islami dari SMPIT Al-Itqon')">
+        <meta name="twitter:description" content="@yield('description', $metaDescription ?: 'Berita dan Artikel Islami dari MAS Miftahul Midad')">
         @stack('twitter_image')
         @if(View::hasSection('twitter_image'))
             @yield('twitter_image')

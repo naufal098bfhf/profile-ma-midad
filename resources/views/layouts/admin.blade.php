@@ -137,6 +137,24 @@ License: For each use you must have a valid license purchased only from above li
 							</ul>
 						</div>
 					</li>
+                    <li class="nav-item">
+    <a
+        href="{{ route('admin.institution-profile.edit') }}"
+        class="nav-link {{ request()->routeIs('admin.institution-profile.*') ? 'active' : '' }}"
+    >
+        <i class="link-icon" data-feather="home"></i>
+        <span class="link-title">Profil Institut</span>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('admin.institution-history.edit') }}"
+       class="nav-link {{ request()->routeIs('admin.institution-history.*') ? 'active' : '' }}">
+
+        <i class="link-icon" data-feather="book-open"></i>
+        <span class="link-title">Sejarah Madrasah</span>
+
+    </a>
+</li>
 					<li class="nav-item">
 						@php $penaKarsaOpen = str_contains(request()->route()->getName(), 'admin.pena-karsa'); @endphp
 						<a class="nav-link" data-bs-toggle="collapse" href="#pena-karsa" role="button" aria-expanded="{{ $penaKarsaOpen ? 'true' : 'false' }}" aria-controls="pena-karsa">

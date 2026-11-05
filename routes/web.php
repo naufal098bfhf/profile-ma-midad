@@ -16,6 +16,14 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TeacherController as AdminTeacherController;
 use App\Http\Controllers\Front\TeacherController as FrontTeacherController;
+use App\Http\Controllers\InstitutionProfileController;
+use App\Http\Controllers\Admin\InstitutionProfileController as AdminInstitutionProfileController;
+use App\Http\Controllers\InstitutionProfilePublicController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\Admin\ProgramController as AdminProgramController;
+use App\Http\Controllers\Admin\InstitutionHistoryController;
+use App\Http\Controllers\InstitutionHistoryController as PublicInstitutionHistoryController;
+
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -289,6 +297,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::delete('/ppdb/{ppdb}/faqs/{faq}', [\App\Http\Controllers\Admin\PpdbFaqController::class, 'destroy'])->name('ppdb.faqs.destroy');
     Route::get('/ppdb/{ppdb}/faqs/{faq}/toggle-status', [\App\Http\Controllers\Admin\PpdbFaqController::class, 'toggleStatus'])->name('ppdb.faqs.toggle-status');
 
+
+    // Program Madrasah management
+    Route::resource('programs', AdminProgramController::class)->except(['show']);
     // PPDB Activities management
     Route::get('/ppdb/{ppdb}/activities', [\App\Http\Controllers\Admin\PpdbActivityController::class, 'index'])->name('ppdb.activities.index');
     Route::get('/ppdb/{ppdb}/activities/create', [\App\Http\Controllers\Admin\PpdbActivityController::class, 'create'])->name('ppdb.activities.create');
@@ -322,3 +333,63 @@ Route::middleware(['auth'])
 Route::get('/guru/{teacher}', [FrontTeacherController::class, 'show'])
     ->name('teachers.show');
 require __DIR__.'/auth.php';
+
+
+Route::middleware(['auth'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get(
+            '/institution-profile',
+            [AdminInstitutionProfileController::class, 'edit']
+        )->name('institution-profile.edit');
+
+        Route::put(
+            '/institution-profile',
+            [AdminInstitutionProfileController::class, 'update']
+        )->name('institution-profile.update');
+    });
+
+// Profil yang dapat dilihat semua pengunjung
+Route::get('/profil-madrasah', [
+    InstitutionProfilePublicController::class,
+    'show'
+])->name('public.institution-profile');
+
+// Pengaturan profil hanya untuk admin yang login
+Route::middleware(['auth'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/institution-profile', [
+            AdminInstitutionProfileController::class,
+            'edit'
+        ])->name('institution-profile.edit');
+
+        Route::put('/institution-profile', [
+            AdminInstitutionProfileController::class,
+            'update'
+        ])->name('institution-profile.update');
+    });
+
+// Halaman Program Madrasah untuk pengunjung
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth'])
+    ->group(function () {
+
+        // Route admin yang sudah ada tetap dipertahankan.
+
+        Route::get('/sejarah-madrasah', [InstitutionHistoryController::class, 'edit'])
+            ->name('institution-history.edit');
+
+        Route::put('/sejarah-madrasah', [InstitutionHistoryController::class, 'update'])
+            ->name('institution-history.update');
+
+    });
+
+Route::put('/sejarah-madrasah', [InstitutionHistoryController::class, 'update'])
+    ->name('institution-history.update');
+
+Route::get('/sejarah-madrasah', [PublicInstitutionHistoryController::class, 'index'])
+    ->name('institution-history.index');

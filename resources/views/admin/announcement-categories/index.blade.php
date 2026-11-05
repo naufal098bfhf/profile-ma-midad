@@ -20,7 +20,7 @@
 				</div>
 				<div class="row align-items-start">
 					<div class="col-md-7">
-						<p class="text-muted tx-13 mb-3 mb-md-0">Kelola semua kategori pengumuman SMPIT Al-Itqon. Anda dapat menambah, mengedit, atau menghapus kategori pengumuman.</p>
+						<p class="text-muted tx-13 mb-3 mb-md-0">Kelola semua kategori pengumuman MAS Miftahul Midad. Anda dapat menambah, mengedit, atau menghapus kategori pengumuman.</p>
 					</div>
 					<div class="col-md-5 d-flex justify-content-md-end">
 						<a href="{{ route('admin.announcement-categories.create') }}" class="btn btn-primary mb-3 mb-md-0">

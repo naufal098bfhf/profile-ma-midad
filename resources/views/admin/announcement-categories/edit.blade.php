@@ -21,7 +21,7 @@
 				</div>
 				<div class="row align-items-start">
 					<div class="col-md-7">
-						<p class="text-muted tx-13 mb-3 mb-md-0">Edit kategori pengumuman "{{ $announcementCategory->name }}" untuk SMPIT Al-Itqon.</p>
+						<p class="text-muted tx-13 mb-3 mb-md-0">Edit kategori pengumuman "{{ $announcementCategory->name }}" untuk MAS Miftahul Midad.</p>
 					</div>
 					<div class="col-md-5 d-flex justify-content-md-end">
 						<a href="{{ route('admin.announcement-categories.index') }}" class="btn btn-secondary mb-3 mb-md-0">
